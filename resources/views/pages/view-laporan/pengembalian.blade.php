@@ -12,7 +12,7 @@
                     <h1 class="h3 mb-0 mt-3 text-black">Data Pengembalian</h1>
                 </div>
 
-                <form action="{{ route('printPengembalian2') }}" target="_blank">
+                <form action="{{ route('printPengembalian2') }}">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -29,7 +29,7 @@
                     </div>
                 </form>
 
-                <form action="{{ route('printPengembalian') }}" target="_blank" class="d-sm-flex align-items-center justify-content-start mb-4">
+                <form action="{{ route('printPengembalian') }}" class="d-sm-flex align-items-center justify-content-start mb-4">
                     @csrf
                     <button class="btn btn-outline-success" type="submit">Cetak Semua Laporan</button>
                 </form>

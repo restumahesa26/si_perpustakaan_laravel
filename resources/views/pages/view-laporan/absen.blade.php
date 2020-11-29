@@ -10,8 +10,13 @@
         <div class="container-fluid">
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 mt-3 text-black">Data Absen / Kunjungan</h1>
+                    <form class="form-inline" action="{{ route('search-absen') }}">
+                        <a href="{{ route('viewAbsen') }}" class="btn btn-danger mr-2 mt-3" id="clear">Bersihkan</a>
+                        <input class="form-control mr-2 mt-3" type="search" placeholder="Kata kunci" aria-label="Search" id="search" name="search" autocomplete="off">
+                        <button class="btn btn-outline-success mt-3" type="submit">Cari</button>
+                    </form>
                 </div>
-                <form action="{{ route('printAbsen2') }}" target="_blank">
+                <form action="{{ route('printAbsen2') }}">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-4">
@@ -28,7 +33,7 @@
                     </div>
                 </form>
                 
-                <form action="{{ route('printAbsen') }}" target="_blank" class="d-sm-flex align-items-center justify-content-start mb-4">
+                <form action="{{ route('printAbsen') }}" class="d-sm-flex align-items-center justify-content-start mb-4">
                     @csrf
                     <button class="btn btn-outline-success" type="submit">Cetak Semua Laporan</button>
                 </form>

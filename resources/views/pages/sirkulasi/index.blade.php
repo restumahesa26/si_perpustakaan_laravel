@@ -7,11 +7,23 @@
 @section('content')
 <div class="content-wrapper">
         <div class="container-fluid">
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="d-sm-flex align-items-center justify-content-between">
                     <h1 class="h3 mb-0 mt-3 text-black">Data Sirkulasi</h1>
                     <a href="{{ route('data-peminjaman.create') }}" class="btn btn-sm btn-primary shadow-sm">
                         <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data Peminjaman
                     </a>
+                </div>
+
+                <div class="d-sm-flex justify-content-end">
+                    <form class="form-inline" action="{{ route('search-sirkulasi') }}">
+                        <a href="{{ route('data-peminjaman.index') }}" class="btn btn-danger mr-2 mt-1" id="clear">Bersihkan</a>
+                        <input class="form-control mr-2 mt-1" type="search" placeholder="Kata kunci ( * )" aria-label="Search" id="search" name="search" autocomplete="off">
+                        <button class="btn btn-outline-success mt-1" type="submit">Cari</button>
+                    </form>
+                </div>
+
+                <div class="d-sm-flex justify-content-end mb-4">
+                    <span class="text-blue">* id anggota, nama, status</span>
                 </div>
             
                 <div class="row mx-1">
@@ -20,7 +32,7 @@
                             <thead>
                                 <tr class="text-center bg-gradient-gray">
                                     <th>No</th>
-                                    <th>Nama</th>
+                                    <th>ID Anggota</th>
                                     <th>Tgl Pinjam</th>
                                     <th>Tgl Perpanjang</th>
                                     <th>Tgl Kembali</th>
@@ -38,7 +50,7 @@
                                 @endphp
                                 <tr class="text-center">
                                     <td class="bg-gradient-gray">{{ $no }}</td>
-                                    <td>{{ $item->pengunjung->nama }}</td>
+                                    <td>{{ $item->pengunjung_id }}</td>
                                     <td>{{ Carbon\Carbon::parse($item->tgl_pinjam)->format('d-m-Y') }}
                                     </td>
                                     <td class="text-center">@if ($item->tgl_panjang == NULL)

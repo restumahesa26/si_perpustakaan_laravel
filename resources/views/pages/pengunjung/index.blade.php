@@ -8,11 +8,19 @@
 
 <div class="content-wrapper">
         <div class="container-fluid">
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="d-sm-flex align-items-center justify-content-between mb-2">
                     <h1 class="h3 mb-0 mt-3 text-black">Data Anggota</h1>
                     <a href="{{ route('data-pengunjung.create') }}" class="btn btn-sm btn-primary shadow-sm">
                         <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data Anggota
                     </a>
+                </div>
+
+                <div class="d-sm-flex justify-content-end mb-4">
+                    <form class="form-inline" action="{{ route('search-pengunjung') }}">
+                        <a href="{{ route('data-pengunjung.index') }}" class="btn btn-danger mr-2 mt-3" id="clear">Bersihkan</a>
+                        <input class="form-control mr-2 mt-3" type="search" placeholder="Kata kunci" aria-label="Search" id="search" name="search" autocomplete="off">
+                        <button class="btn btn-outline-success mt-3" type="submit">Cari</button>
+                    </form>
                 </div>
             
                 <div class="row mx-1">

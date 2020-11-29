@@ -8,11 +8,23 @@
 
 <div class="content-wrapper">
         <div class="container-fluid">
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <div class="d-sm-flex align-items-center justify-content-between mb-0">
                     <h1 class="h3 mb-0 mt-3 text-black">Data Buku</h1>
                     <a href="{{ route('data-buku.create') }}" class="btn btn-sm btn-primary shadow-sm">
                         <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data Buku
                     </a>
+                </div>
+
+                <div class="d-sm-flex justify-content-end">
+                    <form class="form-inline" action="{{ route('search-buku') }}">
+                        <a href="{{ route('data-buku.index') }}" class="btn btn-danger mr-2 mt-1" id="clear">Bersihkan</a>
+                        <input class="form-control mr-2 mt-1" type="search" placeholder="Kata kunci ( * )" aria-label="Search" id="search" name="search" autocomplete="off">
+                        <button class="btn btn-outline-success mt-1" type="submit">Cari</button>
+                    </form>
+                </div>
+
+                <div class="d-sm-flex justify-content-end mb-4">
+                    <span class="text-blue">* id buku, judul, kategori, pengarang, tahun terbit, penerbit</span>
                 </div>
             
                 <div class="row mx-1">

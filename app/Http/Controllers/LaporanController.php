@@ -171,7 +171,6 @@ class LaporanController extends Controller
     public function viewAbsen()
     {
         $items = Absen::orderByRaw('tanggal DESC')->paginate(10);
-        toast('Menu untuk laporan absen kunjungan','info');
         return view('pages.view-laporan.absen', [
             'items' => $items
         ]);
@@ -191,12 +190,18 @@ class LaporanController extends Controller
     {
         $tgl1 = $request->tgl1;
         $tgl2 = $request->tgl2;
-        $item = Absen::all(); 
-        $items = $item->whereBetween('tanggal', [$tgl1, $tgl2]);
 
-        $pdf = PDF::loadview('pages.laporan.absen', [
-            'items' => $items
-        ])->setPaper('legal','landscape');
-        return $pdf->download('laporan-absen-kunjungan');
+        if ($tgl1 == null || $tgl2 == null) {
+            Alert::error('Gagal Membuat Laporan','Tanggal Belum Lengkap');
+            return redirect()->back();
+        } else {
+            $item = Absen::all(); 
+            $items = $item->whereBetween('tanggal', [$tgl1, $tgl2]);
+
+            $pdf = PDF::loadview('pages.laporan.absen', [
+                'items' => $items
+            ])->setPaper('legal','landscape');
+            return $pdf->download('laporan-absen-kunjungan');
+        }
     }
 }

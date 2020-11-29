@@ -12,7 +12,7 @@
                     <h1 class="h3 mb-0 mt-3 text-black">Data Anggota</h1>
                 </div>
 
-                <form action="{{ route('printPengunjung') }}" target="_blank" class="d-sm-flex align-items-center justify-content-start mb-4">
+                <form action="{{ route('printPengunjung') }}" class="d-sm-flex align-items-center justify-content-start mb-4">
                     @csrf
                     <button class="btn btn-outline-success" type="submit">Cetak Laporan</button>
                 </form>

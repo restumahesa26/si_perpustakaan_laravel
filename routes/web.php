@@ -31,6 +31,20 @@ Auth::routes(['verify' => true]);
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])
     ->group(function() {
+        Route::get('/absen-pengunjung/search', 'SearchController@search_absen')->name('search-absen');
+
+        Route::get('/riwayat-peminjaman/search', 'SearchController@search_peminjaman')->name('search-peminjaman');
+
+        Route::get('/riwayat-pengembalian/search', 'SearchController@search_pengembalian')->name('search-pengembalian');
+
+        Route::get('/data-pengunjung/search', 'SearchController@pengunjung')->name('search-pengunjung');
+
+        Route::get('/data-pengadaan/search', 'SearchController@pengadaan')->name('search-pengadaan');
+
+        Route::get('/data-peminjaman/search', 'SearchController@sirkulasi')->name('search-sirkulasi');
+
+        Route::get('/data-buku/search', 'SearchController@buku')->name('search-buku');
+        
         Route::get('/', 'DashboardController@index')->name('dashboard');
 
         Route::get('/pengadaan/{id}', 'APIController@buku_pengadaan')->name('pengadaan-buku');
@@ -112,5 +126,6 @@ Route::prefix('admin')
         Route::get('/cetak-laporan-absen-dan-kunjungan', 'LaporanController@absen')->name('printAbsen');
         
         Route::get('/cetak-laporan-absen-dan-kunjungan-tanggal', 'LaporanController@absen2')->name('printAbsen2');
+
     }); 
 Auth::routes(['verify' => true]);
