@@ -1,0 +1,321 @@
+body {
+  font-family: 'Fira Sans', sans-serif;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 768px) {
+  .nav-link {
+    color: #fff !important;
+    background-color: transparent !important;
+  }
+  .judul-header {
+    font-size: 22px !important;
+    color: #fff !important;
+    opacity: 0;
+    -webkit-transition: 1s all ease-in;
+    transition: 1s all ease-in;
+  }
+  .login-card-1 {
+    margin-top: 20px !important;
+  }
+  .login-card {
+    margin-top: 20px !important;
+  }
+}
+
+.navbar .btn-login {
+  background-color: #126895;
+  color: #fff;
+  font-family: 'Pacifico', cursive;
+}
+
+.navbar .btn-navbar-right {
+  height: 87px;
+  border-radius: 0;
+  margin-top: -16px !important;
+  margin-bottom: -16px !important;
+  margin-right: -16px !important;
+}
+
+.navbar .btn-navbar-right:hover {
+  background-color: #1789c7;
+  color: #fff;
+}
+
+.navbar img {
+  max-height: 60px;
+}
+
+.navbar .nav-link {
+  color: #000 !important;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.navbar .nav-link:hover {
+  background: linear-gradient(60deg, #fff 50%, #1789c7 50%);
+  background-size: 220% 100%;
+  background-position: right bottom;
+  -webkit-transition: all .3s ease-out;
+  transition: all .3s ease-out;
+  border-radius: 10px 10px;
+  color: #fff !important;
+}
+
+header {
+  background-image: url("../images/header.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  height: 100vh;
+  margin-top: -86px;
+  padding-top: 150px;
+}
+
+header .logo-center {
+  height: 250px;
+  opacity: 0;
+  -webkit-transition: 2s all ease-in;
+  transition: 2s all ease-in;
+}
+
+header .judul-header {
+  font-size: 35px;
+  font-weight: bold !important;
+  color: #000 !important;
+  opacity: 0;
+  -webkit-transition: 1s all ease-in;
+  transition: 1s all ease-in;
+  font-family: 'Taviraj', serif;
+  text-shadow: 2px 2px 10px #fff;
+}
+
+header .btn-absen {
+  font-size: 20px;
+  background-color: #127a46 !important;
+  color: #fff;
+  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #fff), color-stop(50%, #127a46));
+  background: linear-gradient(to right, #fff 50%, #127a46 50%);
+  background-size: 220% 100%;
+  background-position: right bottom;
+  -webkit-transition: all .5s ease-out;
+  transition: all .5s ease-out;
+}
+
+header .btn-absen:hover {
+  background-position: left bottom;
+  color: #000;
+}
+
+main .buku-img {
+  height: 250px;
+  width: 230px;
+}
+
+main .card-buku {
+  border-radius: 10px 10px;
+  -webkit-transition: -webkit-box-shadow .5s;
+  transition: -webkit-box-shadow .5s;
+  transition: box-shadow .5s;
+  transition: box-shadow .5s, -webkit-box-shadow .5s;
+}
+
+main .card-buku:hover {
+  -webkit-box-shadow: 0 0 25px rgba(33, 33, 33, 0.2);
+          box-shadow: 0 0 25px rgba(33, 33, 33, 0.2);
+}
+
+main .buku-img-info {
+  font-size: 170px;
+}
+
+main .img-card-top {
+  height: 170px;
+}
+
+main .daftar-buku {
+  margin-top: -25px;
+}
+
+main .carousel-image {
+  height: 550px;
+}
+
+main .about-img {
+  height: 250px;
+  width: 240px;
+  float: left;
+  margin-right: 10px !important;
+}
+
+main .clear-2 {
+  overflow: auto;
+}
+
+main .text-desc {
+  margin-top: 20px;
+}
+
+main .info-opacity {
+  opacity: 0;
+}
+
+main .info {
+  font-family: 'Crimson Text', serif;
+}
+
+main .img-illustration {
+  width: 800px;
+  height: auto;
+  margin-top: -35px;
+}
+
+main .img-illustration-2 {
+  width: 700px;
+  height: auto;
+  margin-top: -35px;
+  margin-left: 85px;
+}
+
+main .img-illustration-3 {
+  width: 650px;
+  height: auto;
+  margin-top: -35px;
+}
+
+main .login-card {
+  margin-top: 60px;
+}
+
+main .login-card-1 {
+  margin-top: 80px;
+}
+
+main .body-card {
+  border: 2px #126895 solid;
+}
+
+main .login-text {
+  font-family: 'Courgette', cursive;
+}
+
+main .btn-daftar {
+  background-color: #1789c7;
+  color: #fff;
+  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #2a2c2b), color-stop(50%, #1789c7));
+  background: linear-gradient(to right, #2a2c2b 50%, #1789c7 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  -webkit-transition: all .5s ease-out;
+  transition: all .5s ease-out;
+}
+
+main .btn-daftar:hover {
+  background-position: left bottom;
+  color: #fff;
+}
+
+main .info-opacity {
+  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #127a46), color-stop(50%, #fff));
+  background: linear-gradient(to right, #127a46 50%, #fff 50%);
+  border-radius: 20px 20px;
+  background-size: 200% 100%;
+  background-position: right bottom;
+  -webkit-transition: all .6s ease-out;
+  transition: all .6s ease-out;
+}
+
+main .info-opacity:hover {
+  background-position: left bottom;
+  color: #fff;
+}
+
+main .about-opacity {
+  background: -webkit-gradient(linear, left top, right top, color-stop(50%, #127a46), color-stop(50%, #fff));
+  background: linear-gradient(to right, #127a46 50%, #fff 50%);
+  border-radius: 20px 20px;
+  background-size: 200% 100%;
+  background-position: right bottom;
+  -webkit-transition: all .6s ease-out;
+  transition: all .6s ease-out;
+}
+
+main .about-opacity:hover {
+  background-position: left bottom;
+  color: #fff;
+}
+
+main .about-opacity:hover h5 {
+  color: #eeff00 !important;
+}
+
+main .card-width {
+  width: 450px;
+  border: 3px #000 solid;
+}
+
+main .img-card {
+  width: 110px;
+  float: left;
+  margin-right: 10px;
+}
+
+main .logo-card {
+  margin-left: 17px;
+  width: 55px;
+  float: left;
+}
+
+main .pemprov {
+  margin-top: -7px;
+}
+
+footer {
+  background-color: #126895;
+  color: #fff;
+}
+
+footer img {
+  max-height: 70px;
+  float: left;
+  margin-right: 8px;
+}
+
+footer .perpus {
+  padding-top: 10px;
+  margin-left: 10px;
+}
+
+footer .kota {
+  margin-top: -10px;
+}
+
+footer .clear {
+  overflow: auto;
+}
+
+footer .operasional {
+  margin-top: 8px;
+}
+
+footer .alamat {
+  float: left;
+  margin-right: 5px;
+}
+
+footer .alamat-2 {
+  margin-left: 5px;
+}
+
+footer .copyright {
+  font-family: 'Courgette', cursive;
+}
+
+footer .footer-title {
+  font-family: 'Merienda', cursive;
+}
+
+footer .telp {
+  margin-top: -10px;
+}
+/*# sourceMappingURL=main.css.map */

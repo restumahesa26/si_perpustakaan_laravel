@@ -1,0 +1,260 @@
+body {
+    font-family: 'Fira Sans', sans-serif;
+    scroll-behavior: smooth;
+}
+
+@media (max-width: 768px) {
+    .nav-link {
+        color: #fff !important;
+        background-color: transparent !important;
+    }
+    .judul-header {
+        font-size: 22px !important;
+        color: #fff !important;
+        opacity: 0;
+        transition: 1s all ease-in;
+    }
+    .login-card-1 {
+        margin-top: 20px !important;
+    }
+    .login-card {
+        margin-top: 20px !important;
+    }
+}
+
+.navbar {
+    .btn-login {
+        background-color: #126895;
+        color: #fff;
+        font-family: 'Pacifico', cursive;
+    }
+    .btn-navbar-right {
+        height: 87px;
+        border-radius: 0;
+        margin-top: -16px !important;
+        margin-bottom: -16px !important;
+        margin-right: -16px !important;
+        &:hover {
+            background-color: #1789c7;
+            color: #fff;
+        }
+    }
+    img {
+        max-height: 60px;
+    }
+    .nav-link {
+        color: #000 !important;
+        font-family: 'Roboto Condensed', sans-serif;
+        &:hover {
+            background: linear-gradient(60deg, #fff 50%, #1789c7 50%);
+            background-size: 220% 100%;
+            background-position: right bottom;
+            transition: all .3s ease-out; 
+            border-radius: 10px 10px;
+            color: #fff !important;
+        }
+    }
+}
+
+header {
+    background-image: url('../images/header.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: 100vh;
+    margin-top: -86px; 
+    padding-top: 150px;
+    .logo-center {
+        height: 250px;
+        opacity: 0;
+        transition: 2s all ease-in;
+    }
+    .judul-header {
+        font-size: 35px;
+        font-weight: bold !important;
+        color: #000 !important;
+        opacity: 0;
+        transition: 1s all ease-in;
+        font-family: 'Taviraj', serif;
+        text-shadow: 2px 2px 10px #fff;
+    }
+    .btn-absen {
+        font-size: 20px;
+        background-color: #127a46 !important;
+        color: #fff;
+        background: linear-gradient(to right, #fff 50%, #127a46 50%);
+        background-size: 220% 100%;
+        background-position: right bottom;
+        transition: all .5s ease-out;
+        &:hover {
+            background-position: left bottom;
+            color: #000;
+        }
+    }
+}
+
+main {
+    .buku-img {
+        height: 250px;
+        width: 230px;
+    }
+    .card-buku {
+        border-radius: 10px 10px;
+        transition: box-shadow .5s;
+        &:hover {
+            box-shadow: 0 0 25px rgba(33,33,33,.2); 
+        }
+    }
+    .buku-img-info {
+        font-size: 170px;
+    }
+    .img-card-top {
+        height: 170px;
+    }
+    .daftar-buku {
+        margin-top: -25px;
+    }
+    .carousel-image {
+        height: 550px;
+    }
+    .about-img {
+        height: 250px;
+        width: 240px;
+        float: left;
+        margin-right: 10px !important;
+    }
+    .clear-2 {
+        overflow: auto;
+    }
+    .text-desc {
+        margin-top: 20px;
+    }
+    .info-opacity {
+        opacity: 0;
+    }
+    .info {
+        font-family: 'Crimson Text', serif;
+    }
+    .img-illustration {
+        width: 800px;
+        height: auto;
+        margin-top: -35px;
+    }
+    .img-illustration-2 {
+        width: 700px;
+        height: auto;
+        margin-top: -35px;
+        margin-left: 85px;
+    }
+    .img-illustration-3 {
+        width: 650px;
+        height: auto;
+        margin-top: -35px;
+    }
+    .login-card {
+        margin-top: 60px;
+    }
+    .login-card-1 {
+        margin-top: 80px;
+    }
+    .body-card {
+        border: 2px #126895 solid;
+    }
+    .login-text {
+        font-family: 'Courgette', cursive;
+    }
+    .btn-daftar {
+        background-color: #1789c7;
+        color: #fff;
+        background: linear-gradient(to right, #2a2c2b 50%, #1789c7 50%);
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: all .5s ease-out;
+        &:hover {
+            background-position: left bottom;
+            color: #fff;
+        }
+    }
+    .info-opacity {
+        background: linear-gradient(to right, #127a46 50%, #fff 50%);
+        border-radius: 20px 20px;
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: all .6s ease-out;
+        &:hover {
+            background-position: left bottom;
+            color: #fff;
+        }
+    }
+    .about-opacity {
+        background: linear-gradient(to right, #127a46 50%, #fff 50%);
+        border-radius: 20px 20px;
+        background-size: 200% 100%;
+        background-position: right bottom;
+        transition: all .6s ease-out;
+        &:hover {
+            h5 {
+                color: #eeff00 !important;
+            }
+            background-position: left bottom;
+            color: #fff;
+        }
+    }
+    .card-width {
+        width: 450px;
+        border: 3px #000 solid;
+    }
+    .img-card {
+        width: 110px;
+        float: left;
+        margin-right: 10px;
+    }
+    .logo-card {
+        margin-left: 17px;
+        width: 55px;
+        float: left;
+    }
+    .pemprov {
+        margin-top: -7px;
+    }
+}
+
+footer {
+    background-color: #126895;
+    color: #fff;
+    img {
+        max-height: 70px;
+        float: left;
+        margin-right: 8px;
+    }
+    .perpus {
+        padding-top: 10px;
+        margin-left: 10px;
+    }
+    .kota {
+        margin-top: -10px;
+    }
+    .clear {
+        overflow: auto;
+    }
+    .operasional {
+        margin-top: 8px;
+    }
+    .alamat {
+        float: left;
+        margin-right: 5px;
+    }
+    .alamat-2 {
+        margin-left: 5px;
+    }
+    .copyright {
+        font-family: 'Courgette', cursive;
+    }
+    .footer-title {
+        font-family: 'Merienda', cursive;
+    }
+    .telp {
+        margin-top: -10px;
+    }
+}
