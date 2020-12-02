@@ -15,12 +15,6 @@
             <h1 class="h3 mb-0 mt-2 text-black ml-2">Perpanjang Peminjaman</h1>
         </div>
 
-        @if ($errors->count() > 0)
-        @php
-        Alert::error('Gagal Mengubah Data', 'Masih Terdapat Data Belum Valid');
-        @endphp
-        @endif
-
         <div class="card">
             <div class="card-body">
                 <form action="{{ route('data-peminjaman.perpanjang', $item->idPeminjaman) }}" method="POST" class="form" id="form">
@@ -107,15 +101,14 @@
                 </div>
                 <div class="form-group">
                     <label for="keterangan">Keterangan</label>
-                    <textarea class="form-control" id="keterangan" placeholder="Keterangan">{{ $item->keterangan }}
-                        </textarea>
+                    <input id="keterangan" type="text" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" placeholder="Keterangan" value="{{ $item->keterangan }}" readonly>
                     @error('keterangan')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">
+                <button type="submit" class="btn btn-primary btn-block perpanjang-confirm">
                     Perpanjang Peminjaman
                 </button>
                 </form>
@@ -150,4 +143,56 @@
         });
     });
 </script>
+
+    @if (Session::get('error-perpanjang'))
+    <script>
+        swal("Gagal", "Format Tanggal Salah", "error");
+    </script>
+    @endif
+
+    @if ($errors->count() > 0)
+        <script>
+            swal("Gagal", "Data Belum Valid", "error");
+        </script>
+    @endif
+
+    <script>
+        $("[type='number']").keypress(function (evt) {
+          evt.preventDefault();
+        });
+
+        $('.perpanjang-confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var value = $('#tgl_pinjam').val();
+            if (!value) {
+              swal("Gagal", "Masih Terdapat Field Yang Kosong", "error");
+              return false;
+            } else {
+              event.preventDefault();
+              swal({
+                  title: `Kembalikan Peminjaman?`,
+                  text: "Pastikan data sudah diisi dengan benar",
+                  icon: "info",
+                  buttons: true,
+              })
+              .then((willDelete) => {
+                  if (willDelete) {
+                      form.submit();
+                  }
+              });
+            }
+        });
+
+        $("document").ready(function(){
+          $('#tgl_pinjam').on("keyup bind cut copy paste focusout change", function () {
+              var value = $(this).val();
+              if(!value){
+                toastr.warning('Error', 'Field Tanggal Tidak Boleh Kosong');
+                  $(this).addClass('is-invalid');
+              }else{
+                  $(this).removeClass('is-invalid');
+              }
+          });
+      });
+    </script>
 @endpush

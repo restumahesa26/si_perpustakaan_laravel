@@ -15,12 +15,6 @@
             <h1 class="h3 mb-0 mt-2 text-black ml-3">Tambah Data Pengadaaan Buku</h1>
         </div>
 
-        @if ($errors->count() > 0)
-            @php
-                Alert::error('Gagal Menambah Data', 'Masih Terdapat Data Belum Valid');
-            @endphp
-        @endif
-
         <div class="card-show">
                 <div class="card-body">
                     <form action="{{ route('data-pengadaan.store') }}" method="POST" class="form" id="form">
@@ -30,8 +24,8 @@
                                 <label for="buku">Buku</label>
                             </div>
                             <div class="col-6">
-                                <select id="buku" name="buku_id" required style="width:500px">
-                                    <option value="">Pilih Buku</option>
+                                <select id="buku" name="buku_id" required="required" class="form-control">
+                                    <option value="null">Pilih Buku</option>
                                     @foreach ($bukus as $buku)
                                     <option value="{{ $buku->idBuku }}">{{ $buku->idBuku }}</option>
                                     @endforeach
@@ -65,8 +59,8 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="jumlah">Jumlah Masuk</label>
-                            <input id="jumlah" type="number" class="form-control @error('jml_masuk') is-invalid @enderror" name="jml_masuk" placeholder="Jumlah Masuk" value="{{ old('jml_masuk') }}" min="0">
+                            <label for="jml_masuk">Jumlah Masuk</label>
+                            <input id="jml_masuk" type="number" class="form-control @error('jml_masuk') is-invalid @enderror" name="jml_masuk" placeholder="Jumlah Masuk" value="{{ old('jml_masuk') }}" min="0">
                             @error('jml_masuk')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -84,15 +78,14 @@
                         </div>
                         <div class="form-group">
                             <label for="keterangan">Keterangan</label>
-                            <textarea class="form-control" id="keterangan" rows="3" name="keterangan" placeholder="Keterangan"> {{ old('keterangan') }}
-                            </textarea>
+                            <input id="keterangan" type="text" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" placeholder="Keterangan" value="{{ old('keterangan') }}">
                             @error('keterangan')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">
+                        <button type="submit" class="btn btn-primary btn-block create-confirm">
                             Simpan
                         </button>
                     </form>
@@ -103,10 +96,8 @@
 @endsection
 @push('addon-script')
 <script type="text/javascript">
-    $('#buku').select2({
-        placeholder : 'Pilih Judul Buku',
-        tags: true
-    });
+
+    $('#buku').select2();
 
     $(document).on('change', '#buku', function (e) {
         var id = $(this).val();
@@ -114,7 +105,6 @@
         $.ajax({
             url: `{{ route('data-peminjaman.show', false) }}/${id}`,
             type: 'get',
-            delay: 100,
             dataType: 'json',
             success: function (response) {
                 if (response != null) {
@@ -126,6 +116,67 @@
         });
     });
 </script>
+
+    @if (Session::get('error-tambah'))
+    <script>
+        swal("Gagal", "Data Pengadaan Buku Sudah Tersedia", "error");
+    </script>
+    @endif
+
+    @if ($errors->count() > 0)
+        <script>
+            swal("Gagal", "Data Belum Valid", "error");
+        </script>
+    @endif
+
+    <script>
+        $('.create-confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var value = $('#asal_buku').val();
+            var value2 = $('#jml_masuk').val();
+            var value3 = $('#tanggal').val();
+            var value4 = $('#keterangan').val();
+            var value5 = $('#buku').val();
+            if (!value || !value2 || !value3 || !value4 || value5 == 'null' ) {
+              swal("Gagal", "Masih Terdapat Field Yang Kosong", "error");
+              return false;
+            } else {
+              event.preventDefault();
+              swal({
+                  title: `Tambah Data?`,
+                  text: "Pastikan data sudah diisi dengan benar",
+                  icon: "info",
+                  buttons: true,
+              })
+              .then((willDelete) => {
+                  if (willDelete) {
+                      form.submit();
+                  }
+              });
+            }
+        });
+
+        $("document").ready(function(){
+            $('#asal_buku, #jml_masuk, #tanggal, #keterangan').on("keyup bind cut copy paste focusout", function () {
+                var value = $(this).val();
+                if(!value){
+                    toastr.warning('Error', 'Field Tidak Boleh Kosong');
+                    $(this).addClass('is-invalid');
+                }else{
+                    $(this).removeClass('is-invalid');
+                }
+            });
+            $('#buku').on("change focusout", function () {
+              var value = $(this).val();
+              if (value == 'null') {
+                  toastr.warning('Error', 'Pilih Terlebih Dahulu');
+                  $(this).addClass('is-invalid');
+              } else {
+                  $(this).removeClass('is-invalid');
+              }
+            });
+        });
+    </script>
 
 <!--  jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>

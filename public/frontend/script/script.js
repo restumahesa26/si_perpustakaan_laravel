@@ -1,8 +1,8 @@
 $(document).ready(function () {
-    var judul = document.getElementById('judul-header');
     var img = document.getElementById('img-header');
-    judul.style.opacity = '1';
     img.style.opacity = '1';
+    var judul = document.getElementById('judul-header');
+    judul.style.opacity = '1';
 
     $(window).scroll(function () {
         $('#buku-info').each(function () {

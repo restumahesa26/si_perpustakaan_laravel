@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="d-sm-flex justify-content-end mb-4">
-                    <span class="text-blue">* id anggota, nama, status</span>
+                    <span class="text-blue">* id anggota</span>
                 </div>
             
                 <div class="row mx-1">
@@ -85,8 +85,8 @@
                                         <form action="{{ route('data-peminjaman.destroy', $item->idPeminjaman) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-outline-danger" data-toggle="tooltip" data-placement="bottom"
-                                                title="Hapus Data">
+                                            <button class="btn btn-outline-danger delete-confirm" data-toggle="tooltip" data-placement="bottom"
+                                                title="Hapus Data" data-name="{{ $item->pengunjung_id }}">
                                                 Hapus
                                             </button>
                                         </form>
@@ -110,3 +110,52 @@
             </div>
 </div>
 @endsection
+
+@push('addon-script')
+
+<script>
+    $('.delete-confirm').click(function(event) {
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: `Hapus Data ${name}?`,
+            text: "Data akan terhapus secara permanen",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            closeOnClickOutside: false,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+    });
+</script>
+
+@if (Session::get('success-hapus'))
+    <script>
+        swal("Berhasil Menghapus Data", "Data Peminjaman Sudah Terhapus Secara Permanen", "success");
+    </script>
+@endif
+
+@if (Session::get('success-tambah'))
+    <script>
+        swal("Berhasil", "Data Peminjaman Berhasil Ditambah", "success");
+    </script>
+@endif
+
+@if (Session::get('success-perpanjang'))
+    <script>
+        swal("Berhasil", "Data Peminjaman Berhasil Diperpanjang", "success");
+    </script>
+@endif
+
+@if (Session::get('success-pengembalian'))
+    <script>
+        swal("Berhasil", "Data Peminjaman Berhasil Dikembalikan", "success");
+    </script>
+@endif
+
+@endpush

@@ -59,10 +59,22 @@
 @endsection
 
 @push('addon-script')
-<script type="text/javascript">
-    $('#pengunjung_id').select2({
-        placeholder : 'Pilih Judul Buku',
-        tags: true
-    });
-</script>
+
+    @if (Session::get('success-daftar'))
+        <script>
+            swal("Berhasil Daftar Anggota", "Silakan ke Bagian Staf untuk Pembuatan Kartu", "success");
+        </script>
+    @endif
+
+    @if (Session::get('error-absen-1'))
+        <script>
+            swal("Gagal Absen", "Hanya Boleh Maksimal 1x Absen", "error");
+        </script>
+    @endif
+
+    @if (Session::get('error-absen-2'))
+        <script>
+            swal("Gagal Absen", "ID Anggota dan Password Tidak Cocok", "error");
+        </script>
+    @endif
 @endpush

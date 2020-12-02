@@ -42,6 +42,7 @@
                     <thead>
                         <tr class="text-center align-items-center">
                             <th>No</th>
+                            <th>Tanggal</th>
                             <th>Buku</th>
                             <th>Asal Buku</th>
                             <th>Jumlah Masuk</th>
@@ -58,6 +59,7 @@
                         @endphp
                         <tr class="text-center align-items-center">
                             <th>{{ $no }}</th>
+                            <td>{{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
                             <td>{{ $item->buku->judul }}</td>
                             <td>{{ $item->asal_buku }}</td>
                             <td>{{ $item->jml_masuk }}</td>

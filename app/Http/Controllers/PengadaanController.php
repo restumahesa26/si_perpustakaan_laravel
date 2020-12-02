@@ -55,11 +55,9 @@ class PengadaanController extends Controller
             $user->stok = $data['jml_masuk'];
             $user->save();
             Pengadaan::create($data);
-            Alert::success('Sukses', 'Berhasil Menambahkan Data');
-            return redirect() -> route('data-pengadaan.index');
+            return redirect() -> route('data-pengadaan.index')-> with('success-tambah','Sukses');
         }else {
-            Alert::error('Gagal Menambah Data', 'Judul Buku Sudah Ada');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()-> with('error-tambah','Gagal');
         }
     }
 
@@ -110,11 +108,9 @@ class PengadaanController extends Controller
             $user = Buku::findOrFail($buku_id2);
             $user->stok = $data['jml_masuk'];
             $user->save();
-            Alert::success('Sukses', 'Berhasil Mengubah Data');
-            return redirect() -> route('data-pengadaan.index');
+            return redirect() -> route('data-pengadaan.index')-> with('success-ubah','Sukses');
         }else {
-            Alert::error('Gagal Mengubah Data', 'Judul Buku Sudah Ada');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()->with('error-ubah','Gagal');
         }
     }
 
@@ -128,7 +124,6 @@ class PengadaanController extends Controller
     {
         $item = Pengadaan::findOrFail($id);
         $item->delete();
-        Alert::success('Sukses', 'Berhasil Menghapus Data');
-        return redirect() -> route('data-pengadaan.index');
+        return redirect() -> route('data-pengadaan.index')-> with('success-hapus','Berhasil');
     }
 }

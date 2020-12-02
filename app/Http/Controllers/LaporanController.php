@@ -71,6 +71,19 @@ class LaporanController extends Controller
         return $pdf->download('laporan-pengadaan-buku');
     }
 
+    public function pengadaan2(Request $request) 
+    {
+      $tgl1 = $request->get('tgl1');
+      $tgl2 = $request->get('tgl2');
+      $item = Pengadaan::all();
+      $items = $item->whereBetween('tanggal', [$tgl1, $tgl2]);
+
+      $pdf = PDF::loadview('pages.laporan.pengadaan', [
+          'items' => $items
+      ])->setPaper('legal','landscape');
+      return $pdf->download('laporan-pengadaan-buku');
+    }
+
     public function viewPeminjaman()
     {
         $items = Peminjaman::where('status', '=', 'Pinjam')->orWhere('status', '=', 'Perpanjang')->get();

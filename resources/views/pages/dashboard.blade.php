@@ -6,17 +6,6 @@
 
 @section('content')
 
-@if (Auth::user()->roles  == "ADMIN")
-    @php
-    toast('Selamat Datang, ADMIN', 'info');
-    @endphp
-@else
-    @php
-    toast('Selamat Datang, STAF', 'info');
-    @endphp
-@endif
-
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -28,8 +17,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Dashboard v1</li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -41,7 +30,7 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-info">
@@ -102,6 +91,38 @@
                     </div>
                 </div>
                 <!-- ./col -->
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ $absen }}</h3>
+                            <p>Kunjungan</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="{{ route('viewAbsen') }}" class="small-box-footer">More info <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ $transaksi }}</h3>
+                            <p>Transaksi</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="{{ route('data-peminjaman.index') }}" class="small-box-footer">More info <i
+                                class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -109,3 +130,27 @@
 </div>
 <!-- /.content-wrapper -->
 @endsection
+
+@push('addon-script')
+    @if (Session::get('success-login'))
+        <script>
+            var nama = '{{ Auth::user()->name }}';
+            var roles = '{{ Auth::user()->roles }}';
+            if(roles === 'ADMIN'){
+                swal({
+                    title: `Selamat Datang Admin!`,
+                    text: `${nama}`, 
+                    icon: 'success', 
+                    buttons: false,
+                });
+            }
+            if(roles === 'STAF'){
+                swal({
+                    title: `Selamat Datang Staf!`,
+                    text: `${nama}`, 
+                    icon: 'success'
+                });
+            }
+        </script>
+    @endif
+@endpush

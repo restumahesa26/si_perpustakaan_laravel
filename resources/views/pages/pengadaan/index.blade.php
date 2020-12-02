@@ -62,8 +62,8 @@
                                         <form action="{{ route('data-pengadaan.destroy', $item->idPengadaan) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-danger hapusData" data-toggle="tooltip" data-placement="bottom"
-                                                title="Hapus Data">
+                                            <button class="btn btn-danger delete-confirm" data-toggle="tooltip" data-placement="bottom"
+                                                title="Hapus Data" data-name="{{ $item->buku_id }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -86,3 +86,46 @@
             </div>
 </div>
 @endsection
+
+@push('addon-script')
+
+<script>
+    $('.delete-confirm').click(function(event) {
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: `Hapus Data ${name}?`,
+            text: "Data akan terhapus secara permanen",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            closeOnClickOutside: false,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+    });
+</script>
+
+@if (Session::get('success-hapus'))
+    <script>
+        swal("Berhasil Menghapus Data", "Data Pengadaan Buku Sudah Terhapus Secara Permanen", "success");
+    </script>
+@endif
+
+@if (Session::get('success-tambah'))
+    <script>
+        swal("Berhasil", "Data Pengadaan Buku Berhasil Ditambah", "success");
+    </script>
+@endif
+
+@if (Session::get('success-ubah'))
+    <script>
+        swal("Berhasil", "Data Pengadaan Buku Berhasil Diubah", "success");
+    </script>
+@endif
+
+@endpush

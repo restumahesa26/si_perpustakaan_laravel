@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Absen;
 use App\Models\Buku;
+use App\Models\Kategori;
 use App\Models\Peminjaman;
+use App\Models\Penerbit;
 use App\Models\Pengadaan;
 use App\Models\Pengunjung;
 use Illuminate\Http\Request;
@@ -32,7 +34,7 @@ class SearchController extends Controller
             toast('Masukkan Kata Kunci','warning');
             return redirect()->back();
         } else {
-            $items = Peminjaman::where('status', '!=', 'Kembali')->where('pengunjung_id', 'LIKE', "%{$search}%")->orWhere('status', 'LIKE', "%{$search}%")->paginate(10);
+            $items = Peminjaman::where('status', '!=', 'Kembali')->where('pengunjung_id', 'LIKE', "%{$search}%")->paginate(10);
         }
         return view('pages.peminjaman.index', [
             'items' => $items
@@ -60,7 +62,7 @@ class SearchController extends Controller
             toast('Masukkan Kata Kunci','warning');
             return redirect()->back();
         } else {
-            $items = Pengunjung::where('idPengunjung', 'LIKE', "%{$search}%")->orhere('nama', 'LIKE', "%{$search}%")->orWhere('no_idt', 'LIKE', "%{$search}%")->orWhere('no_hp', 'LIKE', "%{$search}%")->orWhere('alamat', 'LIKE', "%{$search}%")->paginate(10);
+            $items = Pengunjung::where('idPengunjung', 'LIKE', "%{$search}%")->orWhere('nama', 'LIKE', "%{$search}%")->orWhere('no_idt', 'LIKE', "%{$search}%")->orWhere('no_hp', 'LIKE', "%{$search}%")->orWhere('alamat', 'LIKE', "%{$search}%")->paginate(10);
         }
         return view('pages.pengunjung.index', [
             'items' => $items
@@ -88,7 +90,7 @@ class SearchController extends Controller
             toast('Masukkan Kata Kunci','warning');
             return redirect()->back();
         } else {
-            $items = Peminjaman::where('status', '!=', 'Kembali')->where('pengunjung_id', 'LIKE', "%{$search}%")->orWhere('status', 'LIKE', "%{$search}%")->paginate(10);
+            $items = Peminjaman::where('status', '!=', 'Kembali')->where('pengunjung_id', 'LIKE', "%{$search}%")->paginate(10);
         }
         return view('pages.sirkulasi.index', [
             'items' => $items
@@ -104,6 +106,34 @@ class SearchController extends Controller
         } else {
             $items = Buku::join('tb_kategori', 'tb_buku.kategori_id', '=', 'tb_kategori.id')->join('tb_penerbit', 'tb_buku.penerbit_id', '=', 'tb_penerbit.id')->where('idBuku', 'LIKE', "%{$search}%")->orWhere('pengarang', 'LIKE', "%{$search}%")->orWhere('thn_terbit', 'LIKE', "%{$search}%")->orWhere('judul', 'LIKE', "%{$search}%")->orWhere('namaKategori', 'LIKE', "%{$search}%")->orWhere('namaPenerbit', 'LIKE', "%{$search}%")->paginate(10);
             return view('pages.buku.index', [
+                'items' => $items
+            ]);
+        }
+    }
+
+    public function kategori(Request $request)
+    {        
+        $search = $request->search;
+        if ($search == null) {
+            toast('Masukkan Kata Kunci','warning');
+            return redirect()->back();
+        } else {
+            $items = Kategori::where('namaKategori', 'LIKE', "%{$search}%")->paginate(10);
+            return view('pages.kategori.index', [
+                'items' => $items
+            ]);
+        }
+    }
+
+    public function penerbit(Request $request)
+    {        
+        $search = $request->search;
+        if ($search == null) {
+            toast('Masukkan Kata Kunci','warning');
+            return redirect()->back();
+        } else {
+            $items = Penerbit::where('namaPenerbit', 'LIKE', "%{$search}%")->paginate(10);
+            return view('pages.penerbit.index', [
                 'items' => $items
             ]);
         }

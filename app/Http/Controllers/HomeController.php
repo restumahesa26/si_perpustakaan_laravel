@@ -7,7 +7,6 @@ use App\Models\Buku;
 use App\Http\Requests\PengunjungRequest;
 use App\Models\Absen;
 use App\Models\Pengunjung;
-use RealRashid\SweetAlert\Facades\Alert;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Support\Carbon;
 
@@ -67,11 +66,9 @@ class HomeController extends Controller
                 'no_hp' => $data['no_hp'],   
                 'alamat' => $data['alamat']        
             ]);
-            Alert::success('Sukses', 'Berhasil Daftar Sebagai Anggota');
-            return redirect() -> route('kunjungan');
+            return redirect() -> route('kunjungan') -> with('success-daftar','success');
         }else {
-            Alert::error('Gagal Menambah Data', 'No Identitas Sudah Terdaftar');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput() ->with('error-daftar','error');
         }
     }
 
@@ -95,15 +92,12 @@ class HomeController extends Controller
                     'tanggal' => $tgl, 
                     'tujuan' => $tujuan
                 ]);
-                Alert::success('Berhasil', 'Terimakasih Telah Mengisi Kunjungan');
-                return redirect()->route('home');
+                return redirect()->route('home')->with('success-absen','success');
             }else {
-                Alert::error('Gagal', 'Tidak Boleh Mengabsen 2x');
-                return redirect()->back();
+                return redirect()->back()->with('error-absen-1','error');
             }
         }else{
-            Alert::error('Gagal', 'ID dan Password Tidak Cocok');
-            return redirect()->back();
+            return redirect()->back()->with('error-absen-2','error');
         }
     }
 }

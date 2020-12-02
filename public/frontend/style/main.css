@@ -83,11 +83,11 @@ header .judul-header {
   font-size: 35px;
   font-weight: bold !important;
   color: #000 !important;
-  opacity: 0;
-  -webkit-transition: 1s all ease-in;
-  transition: 1s all ease-in;
   font-family: 'Taviraj', serif;
   text-shadow: 2px 2px 10px #fff;
+  opacity: 0;
+  -webkit-transition: 4s all ease-in;
+  transition: 4s all ease-in;
 }
 
 header .btn-absen {

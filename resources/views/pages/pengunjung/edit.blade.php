@@ -14,12 +14,6 @@
             <h1 class="h3 mb-0 mt-2 text-black ml-2">Ubah Data Anggota</h1>
         </div>
 
-        @if ($errors->count() > 0)
-            @php
-            Alert::error('Gagal Mengubah Data', 'Masih Terdapat Data Belum Valid');
-            @endphp
-        @endif
-
         <div class="card-show">
             <div class="card-body">
                 <form action="{{ route('data-pengunjung.update', $item->idPengunjung) }}" method="POST" class="form" id="form">
@@ -57,7 +51,7 @@
                     <div class="form-group">
                         <label for="jk">Jenis Kelamin</label>
                         <select id="jk" name="jk" class="form-control" required>
-                            <option value="null" disabled selected>Pilih</option>
+                            <option value="null">Pilih</option>
                             <option value="L" @if ( $item-> jk == 'l' )
                                 selected
                             @endif >Laki-Laki</option>
@@ -78,16 +72,14 @@
                     </div>
                     <div class="form-group">
                         <label for="alamat">Alamat Lengkap</label>
-                        <textarea class="form-control" id="alamat" rows="3" name="alamat"
-                            placeholder="Alamat Lengkap"> {{ $item->alamat }}
-                        </textarea>
+                        <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" placeholder="Alamat" value="{{ $item->alamat }}">
                         @error('alamat')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">
+                    <button type="submit" class="btn btn-primary btn-block update-confirm">
                         Ubah Data
                     </button>
                 </form>
@@ -95,6 +87,68 @@
         </div>
     </div>
 </div>
-
-
 @endsection
+
+@push('addon-script')
+@if (Session::get('error-ubah'))
+    <script>
+        swal("Gagal", "No Identitas Sudah Terdaftar", "error");
+    </script>
+    @endif
+
+    @if ($errors->count() > 0)
+        <script>
+            swal("Gagal", "Data Belum Valid", "error");
+        </script>
+    @endif
+
+    <script>
+        $('.update-confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var value = $('#nama').val();
+            var value2 = $('#password').val();
+            var value3 = $('#no_idt').val();
+            var value4 = $('#no_hp').val();
+            var value5 = $('#alamat').val();
+            var value6 = $('#jk').val();
+            if(!value || !value2 || !value3 || !value4 || !value5 || value6 == 'null') {
+                swal("Gagal", "Masih Terdapat Field Yang Kosong", "error");
+                return false;
+            }else {
+                event.preventDefault();
+                swal({
+                    title: `Ubah Data?`,
+                    text: "Pastikan data sudah diisi dengan benar",
+                    icon: "info",
+                    buttons: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+            }
+        });
+
+        $("document").ready(function(){
+            $('#nama, #password, #no_idt, #no_hp, #alamat').on("keyup bind cut copy paste focusout", function () {
+                var value = $(this).val();
+                if(!value){
+                    toastr.warning('Error','Field Tidak Boleh Kosong');
+                    $(this).addClass('is-invalid');
+                }else{
+                    $(this).removeClass('is-invalid');
+                }
+            });
+            $('#jk').on("change focusout", function() {
+                var value = $(this).val();
+                if(value == 'null'){
+                    toastr.warning('Error','Pilih Jenis Kelamin');
+                    $(this).addClass('is-invalid');
+                }else{
+                    $(this).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+@endpush

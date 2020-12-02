@@ -44,6 +44,10 @@ Route::prefix('admin')
         Route::get('/data-peminjaman/search', 'SearchController@sirkulasi')->name('search-sirkulasi');
 
         Route::get('/data-buku/search', 'SearchController@buku')->name('search-buku');
+
+        Route::get('/data-kategori/search', 'SearchController@kategori')->name('search-kategori');
+
+        Route::get('/data-penerbit/search', 'SearchController@penerbit')->name('search-penerbit');
         
         Route::get('/', 'DashboardController@index')->name('dashboard');
 
@@ -102,6 +106,8 @@ Route::prefix('admin')
         Route::get('/laporan-pengadaan-buku', 'LaporanController@viewPengadaan')->name('viewPengadaan');
 
         Route::get('/cetak-laporan-pengadaan-buku', 'LaporanController@pengadaan')->name('printPengadaan'); 
+
+        Route::get('/cetak-laporan-pengadaan-buku-tanggal', 'LaporanController@pengadaan2')->name('printPengadaan2');
 
         Route::get('/laporan-peminjaman', 'LaporanController@viewPeminjaman')->name('viewPeminjaman');
 

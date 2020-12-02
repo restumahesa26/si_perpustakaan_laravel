@@ -21,7 +21,7 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        $items = Peminjaman::where('status', '=', 'Pinjam')->orWhere('status', '=', 'Perpanjang')->orderByRaw('updated_at - created_at DESC')->paginate(10);
+        $items = Peminjaman::where('status', '=', 'Pinjam')->orWhere('status', '=', 'Perpanjang')->orderByRaw('updated_at DESC')->paginate(10);
         return view('pages.sirkulasi.index', [
             'items' => $items
         ]);
@@ -54,9 +54,8 @@ class PeminjamanController extends Controller
         $id = $request->pengunjung_id;
         $check = Peminjaman::where('pengunjung_id', '=', $id)->where('status', '=', 'Perpanjang')->orWhere('status', '=', 'Pinjam')->count();
 
-        if($check > 2) {
-            Alert::error('Gagal', 'Peminjaman Maksimal 3 Kali');
-            return redirect()->back()->withInput();
+        if($check > 3) {
+            return redirect()->back()->withInput()->with('error-tambah','error');
         }else {
             $buku = array();
 
@@ -92,8 +91,7 @@ class PeminjamanController extends Controller
                 $bu->stok = $bu->stok - 1;
                 $bu->save();
             }
-            Alert::success('Sukses', 'Berhasil Menambahkan Data Peminjaman Buku');
-            return redirect() -> route('data-peminjaman.index');
+            return redirect() -> route('data-peminjaman.index')->with('success-tambah','error');
         }
     }
 
@@ -159,8 +157,7 @@ class PeminjamanController extends Controller
         }
         $item->delete();
         
-        Alert::success('Sukses', 'Berhasil Menghapus Data Peminjaman Buku');
-        return redirect() -> route('data-peminjaman.index');
+        return redirect() -> route('data-peminjaman.index')-> with('success-hapus','Berhasil');;
     }
 
     public function kembali($id)
@@ -179,8 +176,7 @@ class PeminjamanController extends Controller
         $date = $tgl->addDays(7);
 
         if($item->tgl_pinjam > $request->tgl_pinjam){
-            Alert::error('Gagal', 'Format Tanggal Salah');
-            return redirect()->back();
+            return redirect()->back()->with('error-perpanjang','error');
         }else {
             $start_date = Carbon::createFromFormat('Y-m-d', $request->tgl_pinjam);
             $end_date = Carbon::createFromFormat('Y-m-d', $item->tgl_kembali);
@@ -200,8 +196,7 @@ class PeminjamanController extends Controller
             $item->status = $status;
             $item->denda = $denda3;
             $item->save();
-            Alert::success('Sukses', 'Berhasil Memperpanjang Peminjaman');
-            return redirect() -> route('data-peminjaman.index');
+            return redirect() -> route('data-peminjaman.index')->with('success-perpanjang','success');
         }
     }
 
@@ -221,8 +216,7 @@ class PeminjamanController extends Controller
         } 
 
         if($item->tgl_pinjam > $request->tgl_pinjam){
-            Alert::error('Gagal', 'Format Tanggal Salah');
-            return redirect()->back();
+            return redirect()->back()->with('error-pengembalian','error');
         }else {
             foreach ($buku as $aa) {
                 $buk = Buku::findOrFail($aa);
@@ -264,8 +258,7 @@ class PeminjamanController extends Controller
             $item->status = $status;
             $item->denda = $denda4;
             $item->save();
-            Alert::success('Sukses', 'Berhasil Mengembalikan Buku');
-            return redirect() -> route('data-peminjaman.index');
+            return redirect() -> route('data-peminjaman.index')->with('success-pengembalian','success');
         }
     }
 

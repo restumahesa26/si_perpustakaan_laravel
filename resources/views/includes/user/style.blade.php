@@ -6,3 +6,4 @@
     rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Taviraj:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url('frontend/libraries/font-awesome/css/font-awesome.min.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>

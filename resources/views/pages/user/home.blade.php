@@ -20,12 +20,12 @@
             <div class="col-md-4 text-center info-opacity" id="buku-info">
                 <i class="fa fa-book buku-img-info pt-2"></i>
                 <h1>Buku</h1>
-                <h2>{{ $buku }}+</h2>
+                <h2>{{ $buku }} +</h2>
             </div>
             <div class="col-md-4 text-center info-opacity" id="anggota-info">
                 <i class="fa fa-id-card buku-img-info pt-2"></i>
                 <h1>Anggota</h1>
-                <h2>{{ $anggota }}+</h2>
+                <h2>{{ $anggota }} +</h2>
             </div>
             <div class="col-md-4 text-center info-opacity" id="pengunjung-info">
                 <i class="fa fa-users buku-img-info pt-2"></i>
@@ -42,7 +42,7 @@
         </div>
         <div class="row justify-content-center daftar-buku" id="daftar-buku">
             @foreach ($items as $item)
-                <div class="col-md-3 card-buku">
+                <div class="col-md-3 card-buku" id="card-buku">
                     <div class="card-body">
                         <div class="text-center">
                             <img src="{{ asset('storage/images/scan-cover-buku/'. $item-> scan) }}" class="buku-img" alt="...">
@@ -91,3 +91,11 @@
     </div>
 </main>
 @endsection
+
+@push('addon-script')
+    @if (Session::get('success-absen'))
+        <script>
+            swal("Berhasil", "Terimakasih Telah Mengisi Absen Kunjungan", "success");
+        </script>
+    @endif
+@endpush

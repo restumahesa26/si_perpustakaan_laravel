@@ -58,8 +58,8 @@
                                         <form action="{{ route('data-buku.destroy', $item->idBuku) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom"
-                                                title="Hapus Data">
+                                            <button class="btn btn-danger delete-confirm" data-toggle="tooltip" data-placement="bottom"
+                                                title="Hapus Data" data-name="{{ $item->idBuku }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </form>
@@ -81,6 +81,53 @@
                 </div>
             </div>
 </div>
-
-
 @endsection
+
+@push('addon-script')
+
+<script>
+    $('.delete-confirm').click(function(event) {
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: `Hapus Data ${name}?`,
+            text: "Data akan terhapus secara permanen",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            closeOnClickOutside: false,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+    });
+</script>
+
+@if (Session::get('error-hapus'))
+    <script>
+        swal("Gagal Menghapus Data", "Buku Sudah Tersedia dan Dipinjam", "error");
+    </script>
+@endif
+
+@if (Session::get('success-hapus'))
+    <script>
+        swal("Berhasil Menghapus Data", "Data Buku Sudah Terhapus Secara Permanen", "success");
+    </script>
+@endif
+
+@if (Session::get('success-tambah'))
+    <script>
+        swal("Berhasil", "Data Pengunjung Berhasil Ditambah", "success");
+    </script>
+@endif
+
+@if (Session::get('success-ubah'))
+    <script>
+        swal("Berhasil", "Data Pengunjung Berhasil Diubah", "success");
+    </script>
+@endif
+
+@endpush

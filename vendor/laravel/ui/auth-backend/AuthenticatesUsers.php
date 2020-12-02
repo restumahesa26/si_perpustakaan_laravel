@@ -113,7 +113,7 @@ trait AuthenticatesUsers
 
         return $request->wantsJson()
                     ? new JsonResponse([], 204)
-                    : redirect()->intended($this->redirectPath());
+                    : redirect()->intended($this->redirectPath())->with('success-login','Sukses');
     }
 
     /**

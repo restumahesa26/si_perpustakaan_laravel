@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Penerbit;
 use App\Http\Requests\PenerbitRequest;
+use App\Models\Buku;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PenerbitController extends Controller
@@ -47,11 +48,9 @@ class PenerbitController extends Controller
 
         if($check === null) {
             Penerbit::create($data);
-            Alert::success('Sukses', 'Berhasil Menambahkan Data Penerbit');
-            return redirect() -> route('data-penerbit.index');
+            return redirect() -> route('data-penerbit.index') -> with('success-tambah','Sukses');
         }else {
-            Alert::error('Gagal Menambah Data', 'Nama Penerbit Sudah Ada');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput() -> with('error-tambah','Gagal');
         }
     }
 
@@ -98,11 +97,9 @@ class PenerbitController extends Controller
 
         if($check === null || strtolower($penerbit) == strtolower($penerbit2)) {
             $item -> update($data);
-            Alert::success('Sukses', 'Berhasil Mengubah Data Penerbit');
-            return redirect() -> route('data-penerbit.index');
+            return redirect() -> route('data-penerbit.index') -> with('success-ubah','Sukses');
         }else {
-            Alert::error('Gagal Mengubah Data', 'Nama Penerbit Sudah Ada');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()->with('error-ubah','Gagal');
         } 
     }
 
@@ -115,10 +112,15 @@ class PenerbitController extends Controller
     public function destroy($id)
     {
         $item = Penerbit::findOrFail($id);
+        $id = $item->id;
 
-        $item->delete();
-        Alert::success('Sukses', 'Berhasil Menghapus Data');
-
-        return redirect() -> route('data-penerbit.index');
+        $data = Buku::where('penerbit_id', '=', $id)->first();
+        
+        if ($data === null) {
+            $item->delete();
+            return redirect() -> back() -> with('success-hapus','Berhasil');
+        }else {
+            return redirect() -> back() -> with('error-hapus','Gagal');
+        }
     }
 }

@@ -10,7 +10,7 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $items = User::all();
+        $items = User::paginate(5);
         return view('pages.staf.index', [
             'items' => $items
         ]);

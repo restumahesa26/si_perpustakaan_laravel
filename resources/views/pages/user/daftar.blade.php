@@ -54,8 +54,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="jk" class="col-form-label">Jenis Kelamin</label>
-                                    <select id="jk" name="jk" class="form-control" required>
-                                        <option value="">Pilih</option>
+                                    <select id="jk" name="jk" class="form-control">
+                                        <option value="null">Pilih</option>
                                         <option value="l" @if ( old('jk') == 'l' )
                                             selected
                                         @endif >Laki-Laki</option>
@@ -75,14 +75,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="alamat" class="col-form-label">Alamat</label>
-                                    <textarea class="form-control" id="alamat" rows="3" name="alamat" placeholder="Alamat Lengkap">{{ old('alamat') }}</textarea>
+                                    <input id="alamat" type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" placeholder="Alamat" value="{{ old('alamat') }}">
                                     @error('alamat')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-daftar">
+                                <button type="submit" class="btn btn-daftar create-confirm">
                                     Daftar
                                 </button>
                             </form>
@@ -93,3 +93,56 @@
         </div>
     </main>
 @endsection
+@push('addon-script')
+    @if (Session::get('error-daftar'))
+        <script>
+            swal("Gagal Daftar", "No Identitas Sudah Digunakan Sebelumnya", "error");
+        </script>
+    @endif
+
+    <script>
+            $('.create-confirm').click(function(event) {
+                var form =  $(this).closest("form");
+                var value = $('#nama, #password, #no_idt, #no_hp, #alamat').val();
+                var jk = $('#jk').val();
+                if(value.length === 0 || jk == "null") {
+                    swal("Gagal", "Masih Terdapat Field Yang Kosong", "error");
+                    return false;
+                }else {
+                    event.preventDefault();
+                    swal({
+                        title: `Daftar sebagai Anggota?`,
+                        text: "Pastikan data sudah diisi dengan benar",
+                        icon: "info",
+                        buttons: true,
+                    })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            form.submit();
+                        }
+                    });
+                }
+            });
+    
+            $("document").ready(function(){
+                $('#nama, #password, #no_idt, #no_hp, #alamat').on("keyup bind cut copy paste focusout", function () {
+                    var value = $(this).val();
+                    if(value.length === 0){
+                        toastr.warning('Field Tidak Boleh Kosong');
+                        $(this).addClass('is-invalid');
+                    }else{
+                        $(this).removeClass('is-invalid');
+                    }
+                });
+                $('#jk').on("change focusout", function() {
+                    var value = $(this).val();
+                    if(value == "null"){
+                        toastr.warning('Pilih Jenis Kelamin');
+                        $(this).addClass('is-invalid');
+                    }else{
+                        $(this).removeClass('is-invalid');
+                    }
+                });
+            });
+        </script>
+@endpush

@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pengunjung;
 use App\Http\Requests\PengunjungRequest;
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Peminjaman;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-use PDF;
 
 class PengunjungController extends Controller
 {
@@ -58,11 +56,9 @@ class PengunjungController extends Controller
                 'no_hp' => $data['no_hp'],   
                 'alamat' => $data['alamat']        
             ]);
-            Alert::success('Sukses', 'Berhasil Menambahkan Data Pengunjung');
-            return redirect() -> route('data-pengunjung.index');
+            return redirect() -> route('data-pengunjung.index') -> with('success-tambah','Sukses');
         }else {
-            Alert::error('Gagal Menambah Data', 'No Identitas Sudah Terdaftar');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput() -> with('error-tambah','Gagal');
         }
     }
 
@@ -109,11 +105,9 @@ class PengunjungController extends Controller
 
         if ($check === null || (strtolower($no_idt) == strtolower($no_idt2))) {
             $item -> update($data);
-            Alert::success('Sukses', 'Berhasil Mengubah Data Pengunjung');
-            return redirect() -> route('data-pengunjung.index');
+            return redirect() -> route('data-pengunjung.index') -> with('success-ubah','Sukses');
         }else {
-            Alert::error('Gagal Menambah Data', 'No Identitas Sudah Terdaftar');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()->with('error-ubah','Gagal');
         }
     }
 
@@ -126,17 +120,15 @@ class PengunjungController extends Controller
     public function destroy($id)
     {
         $item = Pengunjung::findOrFail($id);
-        $id = $item->pengunjung_id;
+        $id = $item->idPengunjung;
 
-        $data = Peminjaman::where('pengunjung_id', '=', $id)->where('status', '=', 'Pinjam')->orWhere('status', '=', 'Perpanjang')->orWhere('status', '=', 'Kembali')->first();
+        $data = Peminjaman::where('pengunjung_id', '=', $id)->first();
         
         if ($data === null) {
             $item->delete();
-            Alert::success('Sukses', 'Berhasil Menghapus Data Pengunjung');
-            return redirect() -> route('data-pengunjung.index');
+            return redirect() -> back() -> with('success-hapus','Berhasil');
         }else {
-            Alert::error('Gagal Menghapus Data', 'Pengunjung Sudah Pernah Meminjam Buku');
-            return redirect() -> route('data-pengunjung.index');
+            return redirect() -> back() -> with('error-hapus','Gagal');
         }
     }
 

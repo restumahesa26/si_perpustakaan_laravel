@@ -24,4 +24,6 @@
 
 @include('includes.user.script')
 
+@stack('addon-script')
+
 </html>

@@ -6,6 +6,9 @@ use App\Models\Kategori;
 use App\Models\Penerbit;
 use App\Models\Buku;
 use App\Http\Requests\BukuRequest;
+use App\Models\BukuPeminjam;
+use App\Models\Peminjaman;
+use App\Models\Pengadaan;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -79,11 +82,9 @@ class BukuController extends Controller
                 'thn_terbit' => $data['thn_terbit'],
                 'scan' => $imageNames
             ]);
-            Alert::success('Sukses', 'Berhasil Menambahkan Data');
-            return redirect() -> route('data-buku.index');
+            return redirect() -> route('data-buku.index') -> with('success-tambah','Sukses');
         }else {
-            Alert::error('Gagal Menambah Data', 'Judul Buku Sudah Ada');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput() -> with('error-tambah','Gagal');
         }
     }
 
@@ -163,11 +164,9 @@ class BukuController extends Controller
                 'thn_terbit' => $data['thn_terbit'],
                 'scan' => $imageName
             ]);
-            Alert::success('Sukses', 'Berhasil Mengubah Data');
-            return redirect() -> route('data-buku.index');
+            return redirect() -> route('data-buku.index') -> with('success-ubah','Sukses');
         }else {
-            Alert::error('Gagal Mengubah Data', 'Judul Buku Sudah Ada');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()->with('error-ubah','Gagal');
         }
     }
 
@@ -181,10 +180,14 @@ class BukuController extends Controller
     {
         $item = Buku::findOrFail($id);
 
-        $item->delete();
-
-        Alert::success('Sukses', 'Berhasil Menghapus Data');
-
-        return redirect() -> route('data-buku.index');
+        $data = Pengadaan::where('buku_id', '=', $id)->first();
+        $data2 = BukuPeminjam::where('buku_idBuku', '=', $id)->first();
+        
+        if ($data === null && $data2 === null) {
+            $item->delete();
+            return redirect() -> route('data-buku.index') -> with('success-hapus','Berhasil');
+        }else {
+            return redirect() -> route('data-buku.index') -> with('error-hapus','Gagal');
+        }
     }
 }

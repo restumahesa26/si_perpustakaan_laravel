@@ -15,23 +15,20 @@
             <h1 class="h3 mb-0 mt-2 text-black ml-2">Tambah Data Peminjaman</h1>
         </div>
 
-        @if ($errors->count() > 0)
-        @php
-        Alert::error('Gagal Menambah Data', 'Masih Terdapat Data Belum Valid');
-        @endphp
-        @endif
-
         <form action="{{ route('data-peminjaman.store') }}" method="POST" class="form" id="form">
             @csrf
             <div class="card">
+                <div class="card-title ml-2 mt-2">
+                  <h4>Data Peminjam</h4>
+                </div>
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-2">
                             <label for="pengunjung_id">ID Anggota</label>
                         </div>
                         <div class="col-4">
-                            <select id="pengunjung_id" name="pengunjung_id" class="form-control" required>
-                                <option value="">Pilih Nama Pengunjung</option>
+                            <select id="pengunjung_id" name="pengunjung_id" class="form-control" required="required">
+                                <option value="null" selected="selected" >Pilih Nama Pengunjung</option>
                                 @foreach ($pengunjungs as $pengunjung)
                                 <option value="{{ $pengunjung->idPengunjung }}" @if ( old('pengunjung_id') == $pengunjung->idPengunjung )
                                         selected
@@ -64,6 +61,9 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card-title ml-2 mt-2">
+                  <h4>Data Buku</h4>
+                </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered">
@@ -79,8 +79,8 @@
                             <tbody id="tbody">
                                 <tr>
                                     <td>
-                                        <select id="buku_id" name="buku_id[]" class="" required>
-                                            <option value="">Pilih Buku</option>
+                                        <select id="buku_id" name="buku_id[]" required="required" class="form-control" style="width:350px;">
+                                            <option value="null" selected="selected">Pilih Buku</option>
                                             @foreach ($bukus as $buku)
                                             <option value="{{ $buku->idBuku }}">{{ $buku->judul }}</option>
                                             @endforeach
@@ -112,8 +112,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>
-                        <textarea class="form-control" id="keterangan" name="keterangan" placeholder="Keterangan">{{ old('keterangan') }}
-                        </textarea>
+                        <input id="keterangan" type="text" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" placeholder="Keterangan" value="{{ old('keterangan') }}">
                         @error('keterangan')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -123,7 +122,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">
+            <button type="submit" class="btn btn-primary btn-block create-confirm">
                 Simpan
             </button>
         </form>
@@ -142,7 +141,7 @@
             // Adding a row inside the tbody. 
             $('#tbody').append(`<tr>
                 <td>
-                    <select id="buku_id`+ ++rowIdx +`" name="buku_id[]" class="" required>
+                    <select id="buku_id`+ ++rowIdx +`" name="buku_id[]" class="form-control" required style="width:350px;">
                         <option value="">Pilih Buku</option>
                         @foreach ($bukus as $buku)
                         <option value="{{ $buku->idBuku }}">{{ $buku->judul }}</option>
@@ -158,10 +157,7 @@
                     </td>
                 </tr>`);
 
-                $('#buku_id'+ rowIdx +'').select2({
-                    placeholder : 'Pilih Buku',
-                    tags: true
-                });
+                $('#buku_id'+ rowIdx +'').select2();
 
                 $(document).on('change', '#buku_id'+ rowIdx +'', function (e) {
                     var id = $(this).val();
@@ -169,7 +165,6 @@
                     $.ajax({
                         url: `{{ route('data-peminjaman.show', false) }}/${id}`,
                         type: 'get',
-                        delay: 100,
                         dataType: 'json',
                         success: function (response) {
                             if (response != null) {
@@ -225,7 +220,6 @@
             $.ajax({
                 url: `{{ route('data-peminjaman.show', false) }}/${id}`,
                 type: 'get',
-                delay: 100,
                 dataType: 'json',
                 success: function (response) {
                     if (response != null) {
@@ -238,15 +232,9 @@
         });
     });
 
-    $('#pengunjung_id').select2({
-        placeholder : 'Pilih Anggota',
-        tags: true
-    });
+    $('#pengunjung_id').select2();
 
-    $('#buku_id').select2({
-        placeholder : 'Pilih Buku',
-        tags: true
-    });
+    $('#buku_id').select2();
 });
 $(document).on('change', '#pengunjung_id', function (e) {
     var id = $(this).val();
@@ -254,7 +242,6 @@ $(document).on('change', '#pengunjung_id', function (e) {
     $.ajax({
         url: `{{ route('api-anggota', false) }}/${id}`,
         type: 'get',
-        delay: 100,
         dataType: 'json',
         success: function (response) {
             if (response != null) {
@@ -265,4 +252,63 @@ $(document).on('change', '#pengunjung_id', function (e) {
     });
 });
 </script>
+
+    @if (Session::get('error-tambah'))
+    <script>
+        swal("Gagal", "Peminjaman Maksimal 3x", "error");
+    </script>
+    @endif
+
+    @if ($errors->count() > 0)
+        <script>
+            swal("Gagal", "Data Belum Valid", "error");
+        </script>
+    @endif
+
+    <script>
+        $('.create-confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var value = $('#keterangan').val();
+            var value2 = $('#buku_id').val();
+            var value3 = $('#pengunjung_id').val();
+            if (!value || value2 == 'null' || value3 == 'null' ) {
+              swal("Gagal", "Masih Terdapat Field Yang Kosong", "error");
+              return false;
+            } else {
+              event.preventDefault();
+              swal({
+                  title: `Tambah Data?`,
+                  text: "Pastikan data sudah diisi dengan benar",
+                  icon: "info",
+                  buttons: true,
+              })
+              .then((willDelete) => {
+                  if (willDelete) {
+                      form.submit();
+                  }
+              });
+            }
+        });
+
+        $("document").ready(function(){
+            $('#keterangan').on("keyup bind cut copy paste focusout", function () {
+                var value = $(this).val();
+                if(!value){
+                  toastr.warning('Error', 'Field Tidak Boleh Kosong');
+                    $(this).addClass('is-invalid');
+                }else{
+                    $(this).removeClass('is-invalid');
+                }
+            });
+            $('#buku_id, #pengunjung_id').on("change focusout selected", function () {
+              var value = $(this).val();
+              if (value == 'null') {
+                  toastr.warning('Error', 'Pilih Terlebih Dahulu');
+                  $(this).addClass('is-invalid');
+              } else {
+                  $(this).removeClass('is-invalid');
+              }
+            });
+        });
+    </script>
 @endpush

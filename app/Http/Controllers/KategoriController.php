@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
 use App\Http\Requests\KategoriRequest;
+use App\Models\Buku;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -48,11 +49,9 @@ class KategoriController extends Controller
 
         if($check === null) {
             Kategori::create($data);
-            Alert::success('Sukses', 'Berhasil Menambahkan Data Kategori');
-            return redirect() -> route('data-kategori.index');
+            return redirect() -> route('data-kategori.index')-> with('success-tambah','Sukses');
         }else {
-            Alert::error('Gagal Menambah Data', 'Nama Kategori Sudah Ada');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()-> with('error-tambah','Gagal');
         }
     }
 
@@ -99,11 +98,9 @@ class KategoriController extends Controller
 
         if($check === null || strtolower($kategori) == strtolower($kategori2)) {
             $item -> update($data);
-            Alert::success('Sukses', 'Berhasil Mengubah Data Kategori');
-            return redirect() -> route('data-kategori.index');
+            return redirect() -> route('data-kategori.index')-> with('success-ubah','Sukses');
         }else {
-            Alert::error('Gagal Mengubah Data', 'Nama Kategori Sudah Ada');
-            return redirect()->back()->withInput();
+            return redirect()->back()->withInput()->with('error-ubah','Gagal');
         }  
     }
 
@@ -116,10 +113,15 @@ class KategoriController extends Controller
     public function destroy($id)
     {
         $item = Kategori::findOrFail($id);
+        $id = $item->id;
 
-        $item->delete();
-        Alert::success('Sukses', 'Berhasil Menghapus Data');
+        $data = Buku::where('kategori_id', '=', $id)->first();
         
-        return redirect() -> route('data-kategori.index');
+        if ($data === null) {
+            $item->delete();
+            return redirect() -> back() -> with('success-hapus','Berhasil');
+        }else {
+            return redirect() -> back() -> with('error-hapus','Gagal');
+        }
     }
 }

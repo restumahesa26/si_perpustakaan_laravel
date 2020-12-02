@@ -7,7 +7,7 @@
 @section('content')
     <main>
         <div class="container mt-5 mb-3">
-            <div class="row justify-content-center daftar-buku">
+            <div class="row justify-content-center daftar-buku" id="daftar-buku">
             @foreach ($items as $item)
                 <div class="col-md-3 card-buku">
                     <div class="card-body">

@@ -38,7 +38,7 @@
                     with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a href="{{ route('viewAbsen') }}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-eye"></i>
                             <p>
                                 Absen Kunjungan
                             </p>
@@ -50,7 +50,7 @@
                     with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a href="{{ route('data-pengadaan.index') }}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-book-open"></i>
                             <p>
                                 Pengadaan Buku
                             </p>
@@ -62,7 +62,7 @@
                     with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <a href={{ route('data-peminjaman.index') }} class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <i class="nav-icon fas fa-recycle"></i>
                             <p>
                                 Sirkulasi
                             </p>
@@ -75,7 +75,7 @@
                 with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-database"></i>
                         <p>
                             Data Master
                             <i class="right fas fa-angle-left"></i>
@@ -115,7 +115,7 @@
                 with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-clipboard"></i>
                         <p>
                             Transaksi
                             <i class="right fas fa-angle-left"></i>
@@ -144,7 +144,7 @@
                 with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-user"></i>
                         <p>
                             Staf / Admin
                             <i class="right fas fa-angle-left"></i>
@@ -173,7 +173,7 @@
                 with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <i class="nav-icon fas fa-file"></i>
                         <p>
                             Laporan
                             <i class="right fas fa-angle-left"></i>

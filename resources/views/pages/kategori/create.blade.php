@@ -14,12 +14,6 @@
             <h1 class="h3 mb-0 mt-2 text-black ml-2">Tambah Data Kategori</h1>
         </div>
 
-        @if ($errors->count() > 0)
-            @php
-            Alert::error('Gagal Mengubah Data', 'Masih Terdapat Data Belum Valid');
-            @endphp
-        @endif
-
         <div class="card-show">
                 <div class="card-body">
                     <form action="{{ route('data-kategori.store') }}" method="POST" class="form" id="form">
@@ -33,7 +27,7 @@
                                 </span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">
+                        <button type="submit" class="btn btn-primary btn-block create-confirm">
                             Simpan
                         </button>
                     </form>
@@ -41,6 +35,55 @@
             </div>
     </div>
 </div>
-
-
 @endsection
+
+@push('addon-script')
+
+    @if (Session::get('error-tambah'))
+    <script>
+        swal("Gagal", "Nama Kategori Sudah Ada", "error");
+    </script>
+    @endif
+
+    @if ($errors->count() > 0)
+        <script>
+            swal("Gagal", "Data Belum Valid", "error");
+        </script>
+    @endif
+
+    <script>
+        $('.create-confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var value = $('#namaKategori').val();
+            if(!value) {
+                swal("Gagal", "Field Nama Kategori Tidak Boleh Kosong", "error");
+                return false;
+            }else {
+                event.preventDefault();
+                swal({
+                    title: `Tambah Data?`,
+                    text: "Pastikan data sudah diisi dengan benar",
+                    icon: "info",
+                    buttons: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+            }
+        });
+
+        $("document").ready(function(){
+            $('#namaKategori').on("keyup bind cut copy paste focusout", function () {
+                var value = $(this).val();
+                if(!value){
+                    toastr.warning('Error','Field Tidak Boleh Kosong');
+                    $(this).addClass('is-invalid');
+                }else{
+                    $(this).removeClass('is-invalid');
+                }
+            });
+        });
+    </script>
+@endpush
