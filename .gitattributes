@@ -1,0 +1,5 @@
+*.css linguist-detectable=false
+*.js linguist-detectable=false
+*.html linguist-detectable=true
+*.blade linguist-detectable=true
+*.scss linguist-detectable=true
