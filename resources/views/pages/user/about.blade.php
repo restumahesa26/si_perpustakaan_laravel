@@ -46,7 +46,7 @@
                     <img src="{{ url('frontend/images/image-1.jpg') }}" alt="" class="about-img rounded-circle">
                     <div class="clear-2"></div>
                     <div class="text-desc">
-                        <h5 class="text-primary">Norizam</h5>
+                        <h5 class="text-primary">Norizam Age Pratama</h5>
                         <p>G1A019014</p>
                         <p class="text-justify">Pada Tugas Akhir Basis Data ini, saya bertugas sebagai Programmer. Yaitu orang yang bertanggung
                             jawab terhadap seluruh kodingan mualai dari frontend dan backend</p>
@@ -59,7 +59,7 @@
                     <div class="clear-2"></div>
                     <div class="text-desc">
                         <h5 class="text-primary">Hendra Yesekyel Pangaribuan</h5>
-                        <p>G1A019014</p>
+                        <p>G1A019072</p>
                         <p class="text-justify">Pada Tugas Akhir Basis Data ini, saya bertugas sebagai Programmer. Yaitu orang yang bertanggung
                             jawab terhadap seluruh kodingan mualai dari frontend dan backend</p>
                     </div>
@@ -71,9 +71,9 @@
                     <div class="clear-2"></div>
                     <div class="text-desc">
                         <h5 class="text-primary">Diyah Ishita Azzahrah</h5>
-                        <p>G1A019014</p>
-                        <p class="text-justify">Pada Tugas Akhir Basis Data ini, saya bertugas sebagai Programmer. Yaitu orang yang bertanggung
-                            jawab terhadap seluruh kodingan mualai dari frontend dan backend</p>
+                        <p>G1A019038</p>
+                        <p class="text-justify">Pada Tugas Akhir Basis Data ini, saya bertugas Membuat Laporan. Yaitu orang yang bertanggung
+                            jawab terhadap laporan dari sistem informasi perpustakaan</p>
                     </div>
                 </div>
             </div>
@@ -83,9 +83,9 @@
                     <div class="clear-2"></div>
                     <div class="text-desc">
                         <h5 class="text-primary">Nabilatul Balqis</h5>
-                        <p>G1A019014</p>
-                        <p class="text-justify">Pada Tugas Akhir Basis Data ini, saya bertugas sebagai Programmer. Yaitu orang yang bertanggung
-                            jawab terhadap seluruh kodingan mualai dari frontend dan backend</p>
+                        <p>G1A019074</p>
+                        <p class="text-justify">Pada Tugas Akhir Basis Data ini, saya bertugas Membuat Laporan. Yaitu orang yang bertanggung
+                          jawab terhadap laporan dari sistem informasi perpustakaan</p>
                     </div>
                 </div>
             </div>

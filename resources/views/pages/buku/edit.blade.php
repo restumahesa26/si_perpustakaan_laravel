@@ -205,7 +205,7 @@
         });
 
         $("document").ready(function(){
-            $('#judul, #isbn, #pengarang, #halaman, #stok, #thn_terbit').on("keyup bind cut copy paste focusout", function () {
+            $('#judul, #isbn, #pengarang, #halaman, #stok, #thn_terbit').on("keyup focusout", function () {
                 var value = $(this).val();
                 if(value.length === 0){
                     toastr.warning('Error','Field Tidak Boleh Kosong');

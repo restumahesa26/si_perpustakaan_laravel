@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-4">
                             <select id="pengunjung_id" name="pengunjung_id" class="form-control" required="required">
-                                <option value="null" selected="selected" >Pilih Nama Pengunjung</option>
+                                <option value="null" selected="selected"  >Pilih Nama Pengunjung</option>
                                 @foreach ($pengunjungs as $pengunjung)
                                 <option value="{{ $pengunjung->idPengunjung }}" @if ( old('pengunjung_id') == $pengunjung->idPengunjung )
                                         selected
@@ -79,7 +79,7 @@
                             <tbody id="tbody">
                                 <tr>
                                     <td>
-                                        <select id="buku_id" name="buku_id[]" required="required" class="form-control" style="width:350px;">
+                                        <select id="buku_id" name="buku_id[]" required="required" class="form-control buku" style="width:350px;">
                                             <option value="null" selected="selected">Pilih Buku</option>
                                             @foreach ($bukus as $buku)
                                             <option value="{{ $buku->idBuku }}">{{ $buku->judul }}</option>
@@ -141,8 +141,8 @@
             // Adding a row inside the tbody. 
             $('#tbody').append(`<tr>
                 <td>
-                    <select id="buku_id`+ ++rowIdx +`" name="buku_id[]" class="form-control" required style="width:350px;">
-                        <option value="">Pilih Buku</option>
+                    <select id="buku_id`+ ++rowIdx +`" name="buku_id[]" class="form-control buku" required style="width:350px;">
+                        <option value="null">Pilih Buku</option>
                         @foreach ($bukus as $buku)
                         <option value="{{ $buku->idBuku }}">{{ $buku->judul }}</option>
                         @endforeach
@@ -176,6 +176,18 @@
                     });
                 });
 
+                $('#buku_id'+ rowIdx +'').on("change focusout selected", function () {
+                  var value = $(this).val();
+                  if (value == 'null') {
+                      toastr.warning('Error', 'Pilih Terlebih Dahulu');
+                      $(this).addClass('is-invalid');
+                      document.getElementById('isbn'+ rowIdx +'').innerHTML = null;
+                      document.getElementById('pengarang'+ rowIdx +'').innerHTML = null;
+                      document.getElementById('penerbit'+ rowIdx +'').innerHTML = null;
+                  } else {
+                      $(this).removeClass('is-invalid');
+                  }
+                });
 
             });
 
@@ -269,7 +281,7 @@ $(document).on('change', '#pengunjung_id', function (e) {
         $('.create-confirm').click(function(event) {
             var form =  $(this).closest("form");
             var value = $('#keterangan').val();
-            var value2 = $('#buku_id').val();
+            var value2 = $('.buku').val();
             var value3 = $('#pengunjung_id').val();
             if (!value || value2 == 'null' || value3 == 'null' ) {
               swal("Gagal", "Masih Terdapat Field Yang Kosong", "error");
@@ -300,11 +312,25 @@ $(document).on('change', '#pengunjung_id', function (e) {
                     $(this).removeClass('is-invalid');
                 }
             });
-            $('#buku_id, #pengunjung_id').on("change focusout selected", function () {
+            $('#buku_id').on("change focusout selected", function () {
               var value = $(this).val();
               if (value == 'null') {
                   toastr.warning('Error', 'Pilih Terlebih Dahulu');
                   $(this).addClass('is-invalid');
+                  document.getElementById('isbn').innerHTML = null;
+                  document.getElementById('pengarang').innerHTML = null;
+                  document.getElementById('penerbit').innerHTML = null;
+              } else {
+                  $(this).removeClass('is-invalid');
+              }
+            });
+            $('#pengunjung_id').on("change focusout selected", function () {
+              var value = $(this).val();
+              if (value == 'null') {
+                  toastr.warning('Error', 'Pilih Terlebih Dahulu');
+                  $(this).addClass('is-invalid');
+                  document.getElementById('nama').innerHTML = null;
+                  document.getElementById('no_telepon').innerHTML = null;
               } else {
                   $(this).removeClass('is-invalid');
               }

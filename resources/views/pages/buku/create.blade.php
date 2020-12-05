@@ -84,7 +84,7 @@
                             <div class="form-group">
                                 <label for="stok">Stok</label>
                                 <input id="stok" type="number" class="form-control @error('stok') is-invalid @enderror"
-                                    name="stok" placeholder="Stok" value="{{ old('stok', "0") }}">
+                                    name="stok" placeholder="Stok" value="{{ old('stok') }}">
                                 @error('stok')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -150,6 +150,12 @@
 </script>
 @endif
 
+@if (Session::get('error-image'))
+<script>
+    swal("Gagal", "Cover Buku Belum Dimasukkan", "error");
+</script>
+@endif
+
 @if ($errors->count() > 0)
 <script>
     swal("Gagal", "Data Belum Valid", "error");
@@ -197,7 +203,7 @@
     });
 
     $("document").ready(function () {
-        $('#judul, #isbn, #pengarang, #halaman, #stok, #thn_terbit').on("keyup bind cut copy paste focusout",
+        $('#judul, #isbn, #pengarang, #halaman, #stok, #thn_terbit').on("keyup focusout",
             function () {
                 var value = $(this).val();
                 if (!value) {

@@ -131,7 +131,7 @@
         });
 
         $("document").ready(function(){
-            $('#nama, #password, #no_idt, #no_hp, #alamat').on("keyup bind cut copy paste focusout", function () {
+            $('#nama, #password, #no_idt, #no_hp, #alamat').on("keyup focusout", function () {
                 var value = $(this).val();
                 if(!value){
                     toastr.warning('Error','Field Tidak Boleh Kosong');

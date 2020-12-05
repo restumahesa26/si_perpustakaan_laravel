@@ -16,7 +16,7 @@ class PengunjungController extends Controller
      */
     public function index()
     {
-        $items = Pengunjung::paginate(10);
+        $items = Pengunjung::orderByRaw('nama ASC')->paginate(10);
         return view('pages.pengunjung.index', [
             'items' => $items
         ]);

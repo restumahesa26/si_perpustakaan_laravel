@@ -7,11 +7,11 @@
 @section('content')
 <div class="content-wrapper">
     <div class="container-fluid">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div class="d-sm-flex align-items-center mb-4">
             <a href="{{ route('data-penerbit.index') }}" class="btn btn-sm btn-warning shadow-sm mb-0 mt-2">
                 <i class="fas fa-arrow-left fa-sm"></i> Back
             </a>
-            <h1 class="h3 mb-0 mt-2 text-black mt-2">Tambah Data Penerbit</h1>
+            <h1 class="h3 mb-0 mt-2 text-black ml-2">Tambah Data Penerbit</h1>
         </div>
 
         <div class="card-show">
@@ -74,7 +74,7 @@
         });
 
         $("document").ready(function(){
-            $('#namaPenerbit').on("keyup bind cut copy paste focusout", function () {
+            $('#namaPenerbit').on("keyup focusout", function () {
                 var value = $(this).val();
                 if(!value){
                     toastr.warning('Error','Field Tidak Boleh Kosong');

@@ -34,7 +34,6 @@
                                 <tr class="text-center bg-gradient-gray">
                                     <th>ID Buku</th>
                                     <th>Judul</th>
-                                    <th>Stok</th>
                                     <th>Kategori</th>
                                     <th>Pengarang</th>
                                     <th>Penerbit</th>
@@ -46,7 +45,6 @@
                                 <tr class="text-center">
                                     <td class="bg-gradient-gray">{{ $item->idBuku }}</td>
                                     <td>{{ $item->judul }}</td>
-                                    <td>{{ $item->stok }}</td>
                                     <td>{{ $item->kategori->namaKategori }}</td>
                                     <td>{{ $item->pengarang }}</td>
                                     <td>{{ $item->penerbit->namaPenerbit }}</td>

@@ -75,7 +75,7 @@
         });
 
         $("document").ready(function(){
-            $('#namaPenerbit').on("keyup bind cut copy paste focusout", function () {
+            $('#namaPenerbit').on("keyup focusout", function () {
                 var value = $(this).val();
                 if(!value){
                     toastr.warning('Error','Field Tidak Boleh Kosong');

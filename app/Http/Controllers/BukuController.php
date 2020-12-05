@@ -7,9 +7,7 @@ use App\Models\Penerbit;
 use App\Models\Buku;
 use App\Http\Requests\BukuRequest;
 use App\Models\BukuPeminjam;
-use App\Models\Peminjaman;
 use App\Models\Pengadaan;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
@@ -36,8 +34,8 @@ class BukuController extends Controller
      */
     public function create()
     {
-        $items = Kategori::all();
-        $items2 = Penerbit::all();
+        $items = Kategori::orderByRaw('namaKategori ASC')->get();
+        $items2 = Penerbit::orderByRaw('namaPenerbit ASC')->get();
         return view('pages.buku.create', [
             'items' => $items, 'items2' => $items2
         ]);
@@ -68,6 +66,8 @@ class BukuController extends Controller
                 Storage::putFileAs('public/images/scan-cover-buku', $file, $imageNames);
                 $thumbnailpath = public_path('storage/images/scan-cover-buku/'.$imageNames);
                 $img = Image::make($thumbnailpath)->resize(400, 600)->save($thumbnailpath);
+            } else {
+              return redirect()->back()->withInput()->with('error-image','Error');
             }
 
             Buku::insert([
@@ -108,8 +108,8 @@ class BukuController extends Controller
     public function edit($id)
     {
         $item = Buku::findOrFail($id);
-        $items = Kategori::all();
-        $items2 = Penerbit::all();
+        $items = Kategori::orderByRaw('namaKategori ASC')->get();
+        $items2 = Penerbit::orderByRaw('namaPenerbit ASC')->get();
         return view('pages.buku.edit', [
             'item' => $item, 'items' => $items, 'items2' => $items2
         ]);

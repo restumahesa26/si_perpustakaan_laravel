@@ -157,7 +157,7 @@
         });
 
         $("document").ready(function(){
-            $('#asal_buku, #jml_masuk, #tanggal, #keterangan').on("keyup bind cut copy paste focusout", function () {
+            $('#asal_buku, #jml_masuk, #tanggal, #keterangan').on("keyup focusout", function () {
                 var value = $(this).val();
                 if(!value){
                     toastr.warning('Error', 'Field Tidak Boleh Kosong');

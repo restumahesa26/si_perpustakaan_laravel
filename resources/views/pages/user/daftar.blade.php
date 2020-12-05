@@ -125,7 +125,7 @@
             });
     
             $("document").ready(function(){
-                $('#nama, #password, #no_idt, #no_hp, #alamat').on("keyup bind cut copy paste focusout", function () {
+                $('#nama, #password, #no_idt, #no_hp, #alamat').on("keyup focusout", function () {
                     var value = $(this).val();
                     if(value.length === 0){
                         toastr.warning('Field Tidak Boleh Kosong');

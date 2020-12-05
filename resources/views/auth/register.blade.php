@@ -11,7 +11,7 @@
         <div class="row justify-content-center pt-3">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header">{{ __('Register') }}</div>
+                        <div class="card-header">{{ __('Tambah Data Staf/ Admin') }}</div>
         
                         <div class="card-body">
                             <form method="POST" action="{{ route('register') }}">
