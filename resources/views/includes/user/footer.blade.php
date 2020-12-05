@@ -9,10 +9,7 @@
                 <p class="kota">Pemerintah Provinsi Bengkulu</p>
                 <div class="clear"></div>
                 <p class="text-justify">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officiis optio qui iusto doloribus
-                    tenetur
-                    praesentium iste hic, nihil molestiae. Fuga fugiat quia pariatur aspernatur alias doloribus
-                    excepturi facere aperiam iure!
+                  Sistem Informasi Perpustakaan Provinsi Bengkulu merupakan sebuah sistem informasi milik Dinas Perpustakaan dan Kearsipan Daerah Provinsi Bengkulu yang berfungsi untuk mengelola data pustaka buku dan transaksi peminjaman buku pada Perpustakaan Daerah Provinsi Bengkulu.
                 </p>
             </div>
             <div class="col-md-4 col-sm-12 mt-2">

@@ -7,11 +7,6 @@
 @section('content')
     <main>
         <div class="container my-4">
-            @if ($errors->count() > 0)
-                @php
-                Alert::error('Gagal Mengubah Data', 'Masih Terdapat Data Belum Valid');
-                @endphp
-            @endif
             <div class="row justify-content-center">
                 <div class="col-md-6 d-none d-md-block">
                     <img src="{{ url('frontend/images/ilustrasi-3.png') }}" alt="" class="img-illustration-3">
@@ -100,49 +95,59 @@
         </script>
     @endif
 
+    @if ($errors->count() > 0)
+    <script>
+        swal("Gagal", "Data Belum Valid", "error");
+    </script>
+    @endif
+
     <script>
             $('.create-confirm').click(function(event) {
-                var form =  $(this).closest("form");
-                var value = $('#nama, #password, #no_idt, #no_hp, #alamat').val();
-                var jk = $('#jk').val();
-                if(value.length === 0 || jk == "null") {
-                    swal("Gagal", "Masih Terdapat Field Yang Kosong", "error");
-                    return false;
-                }else {
-                    event.preventDefault();
-                    swal({
-                        title: `Daftar sebagai Anggota?`,
-                        text: "Pastikan data sudah diisi dengan benar",
-                        icon: "info",
-                        buttons: true,
-                    })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            form.submit();
-                        }
-                    });
-                }
+              var form =  $(this).closest("form");
+              var value = $('#nama').val();
+              var value2 = $('#password').val();
+              var value3 = $('#no_idt').val();
+              var value4 = $('#no_hp').val();
+              var value5 = $('#alamat').val();
+              var value6 = $('#jk').val();
+              if(!value || !value2 || !value3 || !value4 || !value5 || value6 == 'null') {
+                  swal("Gagal", "Masih Terdapat Field Yang Kosong", "error");
+                  return false;
+              }else {
+                  event.preventDefault();
+                  swal({
+                      title: `Tambah Data?`,
+                      text: "Pastikan data sudah diisi dengan benar",
+                      icon: "info",
+                      buttons: true,
+                  })
+                  .then((willDelete) => {
+                      if (willDelete) {
+                          form.submit();
+                      }
+                  });
+              }
             });
     
             $("document").ready(function(){
-                $('#nama, #password, #no_idt, #no_hp, #alamat').on("keyup focusout", function () {
-                    var value = $(this).val();
-                    if(value.length === 0){
-                        toastr.warning('Field Tidak Boleh Kosong');
-                        $(this).addClass('is-invalid');
-                    }else{
-                        $(this).removeClass('is-invalid');
-                    }
-                });
-                $('#jk').on("change focusout", function() {
-                    var value = $(this).val();
-                    if(value == "null"){
-                        toastr.warning('Pilih Jenis Kelamin');
-                        $(this).addClass('is-invalid');
-                    }else{
-                        $(this).removeClass('is-invalid');
-                    }
-                });
-            });
+              $('#nama, #password, #no_idt, #no_hp, #alamat').on("keyup focusout", function () {
+                  var value = $(this).val();
+                  if(!value){
+                      toastr.warning('Error','Field Tidak Boleh Kosong');
+                      $(this).addClass('is-invalid');
+                  }else{
+                      $(this).removeClass('is-invalid');
+                  }
+              });
+              $('#jk').on("change focusout", function() {
+                  var value = $(this).val();
+                  if(value == 'null'){
+                      toastr.warning('Error','Pilih Jenis Kelamin');
+                      $(this).addClass('is-invalid');
+                  }else{
+                      $(this).removeClass('is-invalid');
+                  }
+              });
+          });
         </script>
 @endpush

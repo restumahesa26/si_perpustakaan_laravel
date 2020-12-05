@@ -21,18 +21,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="pengunjung_id" class="col-form-label">ID Anggota : </label>
-                                    <select id="pengunjung_id" name="pengunjung_id" class="form-control" required>
-                                        <option value="">Pilih ID Anggota</option>
-                                        @foreach ($pengunjungs as $pengunjung)
-                                        <option value="{{ $pengunjung->idPengunjung }}">
-                                            {{ $pengunjung->idPengunjung }}
-                                        </option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" class="form-control" id="pengunjung_id" name="pengunjung_id" value="{{ old('pengunjung_id') }}">
                                 </div>
                                 <div class="form-group=">
                                     <label for="pass" class="col-form-label">Password : </label>
-                                    <input type="password" class="form-control" id="pass" name="password">
+                                    <input type="password" class="form-control" id="password" name="password">
                                 </div>
                                 <div class="form-group">
                                     <label for="tujuan" class="col-form-label">Tujuan : </label>
@@ -43,7 +36,7 @@
                                         <option value="rekreasi">Rekreasi</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-daftar">
+                                <button type="submit" class="btn btn-daftar create-confirm">
                                     Isi Absen
                                 </button>
                                 <a class="btn btn-link" href="{{ route('daftar') }}">
@@ -77,4 +70,41 @@
             swal("Gagal Absen", "ID Anggota dan Password Tidak Cocok", "error");
         </script>
     @endif
+
+    <script>
+      $('.create-confirm').click(function(event) {
+          var form =  $(this).closest("form");
+          var value = $('#pengunjung_id').val();
+          var value2 = $('#password').val();
+          if( !value || !value2 ) {
+              swal("Gagal", "Masih Terdapat Field Yang Kosong", "error");
+              return false;
+          }else {
+              event.preventDefault();
+              swal({
+                  title: `Isi Absen Kunjungan?`,
+                  text: "Pastikan data sudah diisi dengan benar",
+                  icon: "info",
+                  buttons: true,
+              })
+              .then((willDelete) => {
+                  if (willDelete) {
+                      form.submit();
+                  }
+              });
+          }
+      });
+
+      $("document").ready(function(){
+          $('#pengunjung_id, #password').on("keyup focusout", function () {
+              var value = $(this).val();
+              if(value.length === 0){
+                  toastr.warning('Field Tidak Boleh Kosong');
+                  $(this).addClass('is-invalid');
+              }else{
+                  $(this).removeClass('is-invalid');
+              }
+          });
+      });
+  </script>
 @endpush
