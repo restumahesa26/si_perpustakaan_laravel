@@ -22,7 +22,7 @@
                     <h5 class="text-center mt-1">KARTU ANGGOTA PERPUSTAKAAN</h5>
                     <h5 class="text-center pemprov">PEMPROV BENGKULU</h5>
                     <hr style="border: 1px solid #000;">
-                    <img src="{{ url('frontend/images/logo.png') }}" alt="" class="img-card">
+                    <img src="{{ url('frontend/images/user.png') }}" alt="" class="img-card">
                     <div class="clear-2"></div>
                     <div class="desc">
                         <span class="text-primary">ID Anggota&emsp;&ensp;&nbsp;</span>
