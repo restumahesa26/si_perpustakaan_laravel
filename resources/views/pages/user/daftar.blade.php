@@ -32,6 +32,7 @@
                                 <div class="form-group=">
                                     <label for="no_idt" class="col-form-label">Nomor Identitas <sup>* KTP, KTM, KTS, dll</sup></label>
                                     <input id="no_idt" type="text" class="form-control @error('no_idt') is-invalid @enderror" name="no_idt" placeholder="Nomor Identitas" value="{{ old('no_idt') }}">
+                                    <h5 class="text-danger" id="info"></h5>
                                     @error('no_idt')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -89,6 +90,30 @@
     </main>
 @endsection
 @push('addon-script')
+<script>
+  $(document).on('keyup change paste', '#no_idt', function (e) {
+      var no_idt = $('#no_idt').val();
+      e.preventDefault();
+      $.ajax({
+          url: `{{ route('api-cek-no_idt') }}`,
+          data: {
+              'no_idt': no_idt
+          },
+          type: 'get',
+          dataType: 'json',
+          success: function (response) {
+              if (response == 'gagal') {
+                document.getElementById('no_idt').classList.add('is-invalid');
+                document.getElementById("info").innerHTML = "No Identitas Sudah Terpakai";
+              }
+              if (response == 'berhasil') {
+                document.getElementById('no_idt').classList.remove('is-invalid');
+                document.getElementById("info").innerHTML = null;
+              }
+          }
+      });
+  });
+</script>
     @if (Session::get('error-daftar'))
         <script>
             swal("Gagal Daftar", "No Identitas Sudah Digunakan Sebelumnya", "error");

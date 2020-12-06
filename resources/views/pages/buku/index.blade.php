@@ -36,7 +36,6 @@
                                     <th>Judul</th>
                                     <th>Kategori</th>
                                     <th>Pengarang</th>
-                                    <th>Penerbit</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -47,7 +46,6 @@
                                     <td>{{ $item->judul }}</td>
                                     <td>{{ $item->kategori->namaKategori }}</td>
                                     <td>{{ $item->pengarang }}</td>
-                                    <td>{{ $item->penerbit->namaPenerbit }}</td>
                                     <td>
                                         <a href="{{ route('data-buku.edit', $item->idBuku) }}" class="btn btn-info" data-toggle="tooltip" data-placement="top"
                                             title="Edit Data">

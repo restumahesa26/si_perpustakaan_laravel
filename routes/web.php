@@ -27,6 +27,10 @@ Route::get('/absen', 'HomeController@absen')->name('absen');
 
 Route::get('/daftar-sebagai-anggota', 'HomeController@tambahAnggota')->name('daftar-anggota');
 
+Route::get('/anggota', 'APIController@cekNoIdentitas')->name('api-cek-no_idt');
+
+Route::get('/idAnggota', 'APIController@cekID')->name('api-cek-id-anggota');
+
 Auth::routes(['verify' => true]);
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])

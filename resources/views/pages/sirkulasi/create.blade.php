@@ -15,6 +15,8 @@
             <h1 class="h3 mb-0 mt-2 text-black ml-2">Tambah Data Peminjaman</h1>
         </div>
 
+        <h1 class="text-danger" id="info"></h1>
+
         <form action="{{ route('data-peminjaman.store') }}" method="POST" class="form" id="form">
             @csrf
             <div class="card">

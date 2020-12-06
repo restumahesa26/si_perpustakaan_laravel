@@ -22,6 +22,7 @@
                                 <div class="form-group">
                                     <label for="pengunjung_id" class="col-form-label">ID Anggota : </label>
                                     <input type="text" class="form-control" id="pengunjung_id" name="pengunjung_id" value="{{ old('pengunjung_id') }}">
+                                    <h5 class="text-danger" id="info"></h5>
                                 </div>
                                 <div class="form-group=">
                                     <label for="pass" class="col-form-label">Password : </label>
@@ -52,6 +53,31 @@
 @endsection
 
 @push('addon-script')
+
+<script>
+  $(document).on('keyup change paste focusout', '#pengunjung_id', function (e) {
+      var id = $('#pengunjung_id').val();
+      e.preventDefault();
+      $.ajax({
+          url: `{{ route('api-cek-id-anggota') }}`,
+          data: {
+              'id_anggota': id
+          },
+          type: 'get',
+          dataType: 'json',
+          success: function (response) {
+              if (response == 'gagal') {
+                document.getElementById('pengunjung_id').classList.add('is-invalid');
+                document.getElementById("info").innerHTML = "ID Belum Terdaftar";
+              }
+              if (response == 'berhasil') {
+                document.getElementById('pengunjung_id').classList.remove('is-invalid');
+                document.getElementById("info").innerHTML = null;
+              }
+          }
+      });
+  });
+</script>
 
     @if (Session::get('success-daftar'))
         <script>
