@@ -13,7 +13,7 @@ class Peminjaman extends Model
     protected $primaryKey = 'idPeminjaman';
 
     protected $fillable = [
-        'idPeminjaman', 'pengunjung_id', 'tgl_pinjam', 'tgl_kembali', 'tgl_panjang', 'tgl_pengembalian', 'status', 'denda', 'keterangan'
+        'idPeminjaman', 'pengunjung_id', 'tgl_pinjam', 'tgl_kembali', 'tgl_panjang', 'tgl_pengembalian', 'status', 'denda', 'keterangan', 'updated_at', 'created_at'
     ];
 
     protected $keyType = 'string';

@@ -170,7 +170,7 @@
             } else {
               event.preventDefault();
               swal({
-                  title: `Kembalikan Peminjaman?`,
+                  title: `Perpanjang Peminjaman?`,
                   text: "Pastikan data sudah diisi dengan benar",
                   icon: "info",
                   buttons: true,

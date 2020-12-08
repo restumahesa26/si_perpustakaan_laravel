@@ -9,7 +9,6 @@ use App\Models\Pengunjung;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use PDF;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class LaporanController extends Controller
 {
@@ -29,7 +28,7 @@ class LaporanController extends Controller
         $pdf = PDF::loadview('pages.laporan.buku', [
             'items' => $items
         ])->setPaper('legal','landscape');
-        return $pdf->download('laporan-buku');
+        return $pdf->download('laporan-buku.pdf');
     }
 
     public function viewPengunjung()
@@ -48,7 +47,7 @@ class LaporanController extends Controller
         $pdf = PDF::loadview('pages.laporan.pengunjung', [
             'items' => $items
         ])->setPaper('legal','landscape');
-        return $pdf->download('laporan-anggota');
+        return $pdf->download('laporan-anggota.pdf');
     }
 
     public function viewPengadaan()
@@ -70,7 +69,7 @@ class LaporanController extends Controller
           $pdf = PDF::loadview('pages.laporan.pengadaan', [
             'items' => $items
           ])->setPaper('legal','landscape');
-          return $pdf->download('laporan-pengadaan-buku');
+          return $pdf->download('laporan-pengadaan-buku.pdf');
         }
     }
 
@@ -92,7 +91,7 @@ class LaporanController extends Controller
           $pdf = PDF::loadview('pages.laporan.pengadaan', [
             'items' => $items
           ])->setPaper('legal','landscape');
-          return $pdf->download('laporan-pengadaan-buku');
+          return $pdf->download('laporan-pengadaan-buku.pdf');
         }
       }
     }
@@ -116,7 +115,7 @@ class LaporanController extends Controller
           $pdf = PDF::loadview('pages.laporan.peminjaman', [
             'items' => $items
           ])->setPaper('legal','landscape');
-          return $pdf->download('laporan-peminjaman-buku');
+          return $pdf->download('laporan-peminjaman-buku.pdf');
         }
     }
 
@@ -138,7 +137,7 @@ class LaporanController extends Controller
             $pdf = PDF::loadview('pages.laporan.peminjaman', [
               'items' => $items
             ])->setPaper('legal','landscape');
-            return $pdf->download('laporan-peminjaman-buku');
+            return $pdf->download('laporan-peminjaman-buku.pdf');
           }
         }
     }
@@ -162,7 +161,7 @@ class LaporanController extends Controller
           $pdf = PDF::loadview('pages.laporan.pengembalian', [
             'items' => $items
           ])->setPaper('legal','landscape');
-          return $pdf->download('laporan-pengembalian-buku');
+          return $pdf->download('laporan-pengembalian-buku.pdf');
         }
     }
 
@@ -184,7 +183,7 @@ class LaporanController extends Controller
             $pdf = PDF::loadview('pages.laporan.pengembalian', [
               'items' => $items
             ])->setPaper('legal','landscape');
-            return $pdf->download('laporan-pengembalian-buku');
+            return $pdf->download('laporan-pengembalian-buku.pdf');
           }
         }
     }
@@ -208,7 +207,7 @@ class LaporanController extends Controller
           $pdf = PDF::loadview('pages.laporan.sirkulasi', [
             'items' => $items
           ])->setPaper('legal','landscape');
-          return $pdf->download('laporan-peminjaman-pengembalian-buku');
+          return $pdf->download('laporan-peminjaman-pengembalian-buku.pdf');
         }
     }
 
@@ -230,7 +229,7 @@ class LaporanController extends Controller
             $pdf = PDF::loadview('pages.laporan.sirkulasi', [
               'items' => $items
             ])->setPaper('legal','landscape');
-            return $pdf->download('laporan-peminjaman-pengembalian-buku');
+            return $pdf->download('laporan-peminjaman-pengembalian-buku.pdf');
           }
         }
     }
@@ -254,7 +253,7 @@ class LaporanController extends Controller
           $pdf = PDF::loadview('pages.laporan.absen', [
             'items' => $items
           ])->setPaper('legal','landscape');
-          return $pdf->download('laporan-absen-kunjungan');
+          return $pdf->download('laporan-absen-kunjungan.pdf');
         }
     }
 
@@ -276,7 +275,7 @@ class LaporanController extends Controller
             $pdf = PDF::loadview('pages.laporan.absen', [
               'items' => $items
             ])->setPaper('legal','landscape');
-            return $pdf->download('laporan-absen-kunjungan');
+            return $pdf->download('laporan-absen-kunjungan.pdf');
           }
         }
     }

@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="pengunjung_id" class="col-form-label">ID Anggota : </label>
-                                    <input type="text" class="form-control" id="pengunjung_id" name="pengunjung_id" value="{{ old('pengunjung_id') }}">
+                                    <input type="text" class="form-control" id="pengunjung_id" name="pengunjung_id" value="{{ old('pengunjung_id') }}" autocomplete="off">
                                     <h5 class="text-danger" id="info"></h5>
                                 </div>
                                 <div class="form-group=">
