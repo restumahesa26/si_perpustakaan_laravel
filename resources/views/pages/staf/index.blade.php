@@ -44,8 +44,8 @@
                                         <form action="{{ route('staf.destroy', $item->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('delete')
-                                            <button class="btn btn-danger" data-toggle="tooltip" data-placement="bottom"
-                                                title="Hapus Data">
+                                            <button class="btn btn-danger delete-confirm" data-toggle="tooltip" data-placement="bottom"
+                                                title="Hapus Data" data-name="{{ $item->name }}">
                                                 Hapus
                                             </button>
                                         </form>
@@ -71,3 +71,26 @@
         </div>
 </div>
 @endsection
+
+@push('addon-script')
+<script>
+    $('.delete-confirm').click(function(event) {
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: `Hapus Data ${name}?`,
+            text: "Data akan terhapus secara permanen",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            closeOnClickOutside: false,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+        });
+    });
+</script>
+@endpush

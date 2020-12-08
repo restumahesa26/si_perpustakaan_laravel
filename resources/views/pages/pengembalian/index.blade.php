@@ -52,7 +52,7 @@
                                 @empty
                                 <tr>
                                     <td colspan="7" class="text-center">
-                                        Tidak Ada Riwayat Peminjaman
+                                        Tidak Ada Riwayat Pengembalian
                                     </td>
                                 </tr>
                             @endforelse
