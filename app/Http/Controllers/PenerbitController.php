@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Penerbit;
 use App\Http\Requests\PenerbitRequest;
 use App\Models\Buku;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class PenerbitController extends Controller
 {

@@ -9,8 +9,6 @@ use App\Models\Buku;
 use App\Models\BukuPeminjam;
 use App\Models\Pengunjung;
 use Illuminate\Support\Carbon;
-use RealRashid\SweetAlert\Facades\Alert;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
 
 class PeminjamanController extends Controller
 {

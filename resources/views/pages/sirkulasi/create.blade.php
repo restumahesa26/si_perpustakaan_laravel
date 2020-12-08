@@ -30,7 +30,7 @@
                         </div>
                         <div class="col-4">
                             <select id="pengunjung_id" name="pengunjung_id" class="form-control" required="required">
-                                <option value="null" selected="selected"  >Pilih Nama Pengunjung</option>
+                                <option value="null" selected="selected"  >Pilih ID Anggota</option>
                                 @foreach ($pengunjungs as $pengunjung)
                                 <option value="{{ $pengunjung->idPengunjung }}" @if ( old('pengunjung_id') == $pengunjung->idPengunjung )
                                         selected
@@ -58,6 +58,20 @@
                         </div>
                         <div class="col-4">
                             <p id="no_telepon">-</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <label>Tanggal Pinjam</label>
+                        </div>
+                        <div class="col-4">
+                            <label>{{ Carbon\Carbon::now()->format('d-m-Y') }}</label>
+                        </div>
+                        <div class="col-2">
+                            <label>Tanggal Kembali</label>
+                        </div>
+                        <div class="col-4">
+                          <label>{{ Carbon\Carbon::now()->addDays(7)->format('d-m-Y') }}</label>
                         </div>
                     </div>
                 </div>
@@ -305,7 +319,7 @@ $(document).on('change', '#pengunjung_id', function (e) {
         });
 
         $("document").ready(function(){
-            $('#keterangan').on("keyup bind cut copy paste focusout", function () {
+            $('#keterangan').on("keyup focusout", function () {
                 var value = $(this).val();
                 if(!value){
                   toastr.warning('Error', 'Field Tidak Boleh Kosong');

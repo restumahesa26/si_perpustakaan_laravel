@@ -38,16 +38,16 @@
 
         <div class="row mt-3">
             <div class="table-responsive">
-                <table class="table table-bordered" width="100%" cellspacing="0">
+                <table class="table table-bordered" width="100%" cellspacing="0" style="border: 1px #000 solid;">
                     <thead>
                         <tr class="text-center align-items-center">
-                            <th>No</th>
-                            <th>ID Anggota</th>
-                            <th>Nama</th>
-                            <th>No. Identitas</th>
-                            <th>Jenis Kelamin</th>
-                            <th>No. Telp</th>
-                            <th>Alamat</th>
+                            <th style="border: 1px #000 solid;">No</th>
+                            <th style="border: 1px #000 solid;">ID Anggota</th>
+                            <th style="border: 1px #000 solid;">Nama</th>
+                            <th style="border: 1px #000 solid;">No. Identitas</th>
+                            <th style="border: 1px #000 solid;">Jenis Kelamin</th>
+                            <th style="border: 1px #000 solid;">No. Telp</th>
+                            <th style="border: 1px #000 solid;">Alamat</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
@@ -59,17 +59,17 @@
                         $no++;
                         @endphp
                         <tr class="text-center align-items-center">
-                            <th>{{ $no }}</th>
-                            <td>{{ $item-> idPengunjung }}</td>
-                            <td>{{ $item-> nama }}</td>
-                            <td>{{ $item-> no_idt }}</td>
-                            <td>@if ($item->jk == "l")
+                            <th style="border: 1px #000 solid;">{{ $no }}</th>
+                            <td style="border: 1px #000 solid;">{{ $item-> idPengunjung }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item-> nama }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item-> no_idt }}</td>
+                            <td style="border: 1px #000 solid;">@if ($item->jk == "l")
                                 Laki - Laki
                             @else
                                 Perempuan
                             @endif</td>
-                            <td>{{ $item-> no_hp }}</td>
-                            <td>{{ $item-> alamat }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item-> no_hp }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item-> alamat }}</td>
                         </tr>
                         @empty
                         <tr>

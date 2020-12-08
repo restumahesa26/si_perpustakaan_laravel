@@ -38,15 +38,15 @@
 
         <div class="row mt-3">
             <div class="table-responsive">
-                <table class="table table-bordered" width="100%" cellspacing="0">
+                <table class="table table-bordered" width="100%" cellspacing="0" style="border: 1px #000 solid;">
                     <thead>
                         <tr class="text-center align-items-center">
-                            <th>No</th>
-                            <th>Tanggal</th>
-                            <th>Buku</th>
-                            <th>Asal Buku</th>
-                            <th>Jumlah Masuk</th>
-                            <th>Keterangan</th>
+                            <th style="border: 1px #000 solid;">No</th>
+                            <th style="border: 1px #000 solid;">Tanggal</th>
+                            <th style="border: 1px #000 solid;">Buku</th>
+                            <th style="border: 1px #000 solid;">Asal Buku</th>
+                            <th style="border: 1px #000 solid;">Jumlah Masuk</th>
+                            <th style="border: 1px #000 solid;">Keterangan</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
@@ -58,12 +58,12 @@
                         $no++;
                         @endphp
                         <tr class="text-center align-items-center">
-                            <th>{{ $no }}</th>
-                            <td>{{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
-                            <td>{{ $item->buku->judul }}</td>
-                            <td>{{ $item->asal_buku }}</td>
-                            <td>{{ $item->jml_masuk }}</td>
-                            <td>{{ $item->keterangan }}</td>
+                            <th style="border: 1px #000 solid;">{{ $no }}</th>
+                            <td style="border: 1px #000 solid;">{{ Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item->buku->judul }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item->asal_buku }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item->jml_masuk }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item->keterangan }}</td>
                         </tr>
                         @empty
                         <tr>

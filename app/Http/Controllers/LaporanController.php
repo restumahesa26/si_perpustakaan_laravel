@@ -9,7 +9,6 @@ use App\Models\Pengunjung;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 use PDF;
-use Illuminate\Support\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class LaporanController extends Controller
@@ -55,7 +54,6 @@ class LaporanController extends Controller
     public function viewPengadaan()
     {
         $items = Pengadaan::all();
-        toast('Menu untuk laporan pengadaan buku','info');
         return view('pages.view-laporan.pengadaan', [
             'items' => $items
         ]);
@@ -64,30 +62,44 @@ class LaporanController extends Controller
     public function pengadaan() 
     {
         $items = Pengadaan::all();
+        $count = $items->count();
 
-        $pdf = PDF::loadview('pages.laporan.pengadaan', [
+        if($count < 1) {
+          return redirect()->back()->with('error-kosong1','Error');
+        }else {
+          $pdf = PDF::loadview('pages.laporan.pengadaan', [
             'items' => $items
-        ])->setPaper('legal','landscape');
-        return $pdf->download('laporan-pengadaan-buku');
+          ])->setPaper('legal','landscape');
+          return $pdf->download('laporan-pengadaan-buku');
+        }
     }
 
     public function pengadaan2(Request $request) 
     {
       $tgl1 = $request->get('tgl1');
       $tgl2 = $request->get('tgl2');
-      $item = Pengadaan::all();
-      $items = $item->whereBetween('tanggal', [$tgl1, $tgl2]);
 
-      $pdf = PDF::loadview('pages.laporan.pengadaan', [
-          'items' => $items
-      ])->setPaper('legal','landscape');
-      return $pdf->download('laporan-pengadaan-buku');
+      if($tgl1 > $tgl2 || $tgl1 == null || $tgl2 == null) {
+        return redirect()->back()->with('error-tanggal','Error');
+      }else {
+        $item = Pengadaan::all();
+        $items = $item->whereBetween('tanggal', [$tgl1, $tgl2]);
+        $count = $items->count();
+
+        if($count < 1) {
+          return redirect()->back()->with('error-kosong','Error');
+        }else {
+          $pdf = PDF::loadview('pages.laporan.pengadaan', [
+            'items' => $items
+          ])->setPaper('legal','landscape');
+          return $pdf->download('laporan-pengadaan-buku');
+        }
+      }
     }
 
     public function viewPeminjaman()
     {
         $items = Peminjaman::where('status', '=', 'Pinjam')->orWhere('status', '=', 'Perpanjang')->get();
-        toast('Menu untuk laporan peminjaman buku','info');
         return view('pages.view-laporan.peminjaman', [
             'items' => $items
         ]);
@@ -96,11 +108,16 @@ class LaporanController extends Controller
     public function peminjaman() 
     {
         $items = Peminjaman::where('status', '=', 'Pinjam')->orWhere('status', '=', 'Perpanjang')->get();
+        $count = $items->count();
 
-        $pdf = PDF::loadview('pages.laporan.peminjaman', [
+        if($count < 1) {
+          return redirect()->back()->with('error-kosong1','Error');
+        }else {
+          $pdf = PDF::loadview('pages.laporan.peminjaman', [
             'items' => $items
-        ])->setPaper('legal','landscape');
-        return $pdf->download('laporan-peminjaman-buku');
+          ])->setPaper('legal','landscape');
+          return $pdf->download('laporan-peminjaman-buku');
+        }
     }
 
     public function peminjaman2(Request $request) 
@@ -108,19 +125,27 @@ class LaporanController extends Controller
         $tgl1 = $request->get('tgl1');
         $tgl2 = $request->get('tgl2');
 
-        $item = Peminjaman::where('status', '=', 'Pinjam')->orWhere('status', '=', 'Perpanjang')->get(); 
-        $items = $item->whereBetween('tgl_pinjam', [$tgl1, $tgl2]);
+        if($tgl1 > $tgl2 || $tgl1 == null || $tgl2 == null) {
+          return redirect()->back()->with('error-tanggal','Error');
+        }else {
+          $item = Peminjaman::where('status', '=', 'Pinjam')->orWhere('status', '=', 'Perpanjang')->get(); 
+          $items = $item->whereBetween('tgl_pinjam', [$tgl1, $tgl2]);
+          $count = $items->count();
 
-        $pdf = PDF::loadview('pages.laporan.peminjaman', [
-            'items' => $items
-        ])->setPaper('legal','landscape');
-        return $pdf->download('laporan-peminjaman-buku');
+          if($count < 1) {
+            return redirect()->back()->with('error-kosong','Error');
+          }else {
+            $pdf = PDF::loadview('pages.laporan.peminjaman', [
+              'items' => $items
+            ])->setPaper('legal','landscape');
+            return $pdf->download('laporan-peminjaman-buku');
+          }
+        }
     }
 
     public function viewPengembalian()
     {
         $items = Peminjaman::where('status', '=', 'Kembali')->get();
-        toast('Menu untuk laporan pengembalian buku','info');
         return view('pages.view-laporan.pengembalian', [
             'items' => $items
         ]);
@@ -129,30 +154,44 @@ class LaporanController extends Controller
     public function pengembalian() 
     {
         $items = Peminjaman::where('status', '=', 'Kembali')->get();
+        $count = $items->count();
 
-        $pdf = PDF::loadview('pages.laporan.pengembalian', [
+        if($count < 1) {
+          return redirect()->back()->with('error-kosong1','Error');
+        }else {
+          $pdf = PDF::loadview('pages.laporan.pengembalian', [
             'items' => $items
-        ])->setPaper('legal','landscape');
-        return $pdf->download('laporan-pengembalian-buku');
+          ])->setPaper('legal','landscape');
+          return $pdf->download('laporan-pengembalian-buku');
+        }
     }
 
     public function pengembalian2(Request $request) 
     {
         $tgl1 = $request->tgl1;
         $tgl2 = $request->tgl2;
-        $item = Peminjaman::where('status', '=', 'Kembali')->get(); 
-        $items = $item->whereBetween('tgl_pinjam', [$tgl1, $tgl2]);
 
-        $pdf = PDF::loadview('pages.laporan.pengembalian', [
-            'items' => $items
-        ])->setPaper('legal','landscape');
-        return $pdf->download('laporan-pengembalian-buku');
+        if($tgl1 > $tgl2 || $tgl1 == null || $tgl2 == null) {
+          return redirect()->back()->with('error-tanggal','Error');
+        }else {
+          $item = Peminjaman::where('status', '=', 'Kembali')->get(); 
+          $items = $item->whereBetween('tgl_pinjam', [$tgl1, $tgl2]);
+          $count = $items->count();
+
+          if($count < 1) {
+            return redirect()->back()->with('error-kosong','Error');
+          }else {
+            $pdf = PDF::loadview('pages.laporan.pengembalian', [
+              'items' => $items
+            ])->setPaper('legal','landscape');
+            return $pdf->download('laporan-pengembalian-buku');
+          }
+        }
     }
 
     public function viewSirkulasi()
     {
         $items = Peminjaman::all();
-        toast('Menu untuk laporan sirkulasi buku','info');
         return view('pages.view-laporan.sirkulasi', [
             'items' => $items
         ]);
@@ -161,24 +200,39 @@ class LaporanController extends Controller
     public function sirkulasi() 
     {
         $items = Peminjaman::all();
+        $count = $items->count();
 
-        $pdf = PDF::loadview('pages.laporan.sirkulasi', [
+        if($count < 1) {
+          return redirect()->back()->with('error-kosong1','Error');
+        }else {
+          $pdf = PDF::loadview('pages.laporan.sirkulasi', [
             'items' => $items
-        ])->setPaper('legal','landscape');
-        return $pdf->download('laporan-peminjaman-pengembalian-buku');
+          ])->setPaper('legal','landscape');
+          return $pdf->download('laporan-peminjaman-pengembalian-buku');
+        }
     }
 
     public function sirkulasi2(Request $request) 
     {
         $tgl1 = $request->tgl1;
         $tgl2 = $request->tgl2;
-        $item = Peminjaman::all(); 
-        $items = $item->whereBetween('tgl_pinjam', [$tgl1, $tgl2]);
 
-        $pdf = PDF::loadview('pages.laporan.sirkulasi', [
-            'items' => $items
-        ])->setPaper('legal','landscape');
-        return $pdf->download('laporan-peminjaman-pengembalian-buku');
+        if($tgl1 > $tgl2 || $tgl1 == null || $tgl2 == null) {
+          return redirect()->back()->with('error-tanggal','Error');
+        }else {
+          $item = Peminjaman::all(); 
+          $items = $item->whereBetween('tgl_pinjam', [$tgl1, $tgl2]);
+          $count = $items->count();
+
+          if($count < 1) {
+            return redirect()->back()->with('error-kosong','Error');
+          }else {
+            $pdf = PDF::loadview('pages.laporan.sirkulasi', [
+              'items' => $items
+            ])->setPaper('legal','landscape');
+            return $pdf->download('laporan-peminjaman-pengembalian-buku');
+          }
+        }
     }
 
     public function viewAbsen()
@@ -192,11 +246,16 @@ class LaporanController extends Controller
     public function absen() 
     {
         $items = Absen::all();
+        $count = $items->count();
 
-        $pdf = PDF::loadview('pages.laporan.absen', [
+        if($count < 1) {
+          return redirect()->back()->with('error-kosong1','Error');
+        }else {
+          $pdf = PDF::loadview('pages.laporan.absen', [
             'items' => $items
-        ])->setPaper('legal','landscape');
-        return $pdf->download('laporan-absen-kunjungan');
+          ])->setPaper('legal','landscape');
+          return $pdf->download('laporan-absen-kunjungan');
+        }
     }
 
     public function absen2(Request $request) 
@@ -204,17 +263,21 @@ class LaporanController extends Controller
         $tgl1 = $request->tgl1;
         $tgl2 = $request->tgl2;
 
-        if ($tgl1 == null || $tgl2 == null) {
-            Alert::error('Gagal Membuat Laporan','Tanggal Belum Lengkap');
-            return redirect()->back();
-        } else {
-            $item = Absen::all(); 
-            $items = $item->whereBetween('tanggal', [$tgl1, $tgl2]);
+        if($tgl1 > $tgl2 || $tgl1 == null || $tgl2 == null) {
+          return redirect()->back()->with('error-tanggal','Error');
+        }else {
+          $item = Absen::all(); 
+          $items = $item->whereBetween('tanggal', [$tgl1, $tgl2]);
+          $count = $items->count();
 
+          if($count < 1) {
+            return redirect()->back()->with('error-kosong','Error');
+          }else {
             $pdf = PDF::loadview('pages.laporan.absen', [
-                'items' => $items
+              'items' => $items
             ])->setPaper('legal','landscape');
             return $pdf->download('laporan-absen-kunjungan');
+          }
         }
     }
 }

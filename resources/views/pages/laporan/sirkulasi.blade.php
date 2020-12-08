@@ -38,18 +38,18 @@
 
         <div class="row mt-3">
             <div class="table-responsive">
-                <table class="table table-bordered" width="100%" cellspacing="0">
+                <table class="table table-bordered" width="100%" cellspacing="0" style="border: 1px #000 solid;">
                     <thead>
                         <tr class="text-center align-items-center">
-                            <th>No</th>
-                            <th>Nama</th>
-                            <td>Buku</td>
-                            <th>Tgl Pinjam</th>
-                            <th>Tgl Perpanjang</th>
-                            <th>Tgl Pengembalian</th>
-                            <th>Tgl Kembali</th>
-                            <th>Status</th>
-                            <th>Denda</th>
+                            <th style="border: 1px #000 solid;">No</th>
+                            <th style="border: 1px #000 solid;">Nama</th>
+                            <td style="border: 1px #000 solid;">Buku</td>
+                            <th style="border: 1px #000 solid;">Tgl Pinjam</th>
+                            <th style="border: 1px #000 solid;">Tgl Perpanjang</th>
+                            <th style="border: 1px #000 solid;">Tgl Pengembalian</th>
+                            <th style="border: 1px #000 solid;">Tgl Kembali</th>
+                            <th style="border: 1px #000 solid;">Status</th>
+                            <th style="border: 1px #000 solid;">Denda</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
@@ -61,27 +61,27 @@
                         $no++;
                         @endphp
                         <tr class="align-items-center">
-                            <th class="text-center">{{ $no }}</th>
-                            <td class="text-center">{{ $item->pengunjung->nama }}</td>
-                            <td><ul>
+                            <th class="text-center" style="border: 1px #000 solid;">{{ $no }}</th>
+                            <td class="text-center" style="border: 1px #000 solid;">{{ $item->pengunjung->nama }}</td>
+                            <td style="border: 1px #000 solid;"><ul>
                                 @foreach ($item->buku as $itemx)
                                     <li>{{ $itemx->judul }}</li>
                                 @endforeach
                             </ul></td>
-                            <td class="text-center">{{ Carbon\Carbon::parse($item->tgl_pinjam)->format('d-m-Y') }}</td>
-                            <td class="text-center">@if ($item->tgl_panjang == NULL)
+                            <td class="text-center" style="border: 1px #000 solid;">{{ Carbon\Carbon::parse($item->tgl_pinjam)->format('d-m-Y') }}</td>
+                            <td class="text-center" style="border: 1px #000 solid;">@if ($item->tgl_panjang == NULL)
                                     -
                                 @else
                                 {{ Carbon\Carbon::parse($item->tgl_panjang)->format('d-m-Y') }}
                                 @endif</td>
-                            <td class="text-center">@if ($item->tgl_pengembalian == NULL)
+                            <td class="text-center" style="border: 1px #000 solid;">@if ($item->tgl_pengembalian == NULL)
                                 -
                             @else
                             {{ Carbon\Carbon::parse($item->tgl_pengembalian)->format('d-m-Y') }}
                             @endif</td>
-                            <td class="text-center">{{ Carbon\Carbon::parse($item->tgl_kembali)->format('d-m-Y') }}</td>
-                            <td class="text-center">{{ $item->status }}</td>
-                            <td class="text-center">@if (rupiahFormat($item->denda) == 'Rp. 0,-')
+                            <td class="text-center" style="border: 1px #000 solid;">{{ Carbon\Carbon::parse($item->tgl_kembali)->format('d-m-Y') }}</td>
+                            <td class="text-center" style="border: 1px #000 solid;">{{ $item->status }}</td>
+                            <td class="text-center" style="border: 1px #000 solid;">@if (rupiahFormat($item->denda) == 'Rp. 0,-')
                                 -
                             @else
                                 {{ rupiahFormat($item->denda) }}

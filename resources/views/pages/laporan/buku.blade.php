@@ -38,17 +38,17 @@
 
         <div class="row mt-3">
             <div class="table-responsive">
-                <table class="table table-bordered" width="100%" cellspacing="0">
+                <table class="table table-bordered" width="100%" cellspacing="0" style="border: 1px #000 solid;">
                     <thead>
                         <tr class="text-center align-items-center">
-                            <th>No</th>
-                            <th>ID Buku</th>
-                            <th>Judul</th>
-                            <th>ISBN</th>
-                            <th>Pengarang</th>
-                            <th>Halaman</th>
-                            <th>Tahun Terbit</th>
-                            <th>Penerbit</th>
+                            <th style="border: 1px #000 solid;">No</th>
+                            <th style="border: 1px #000 solid;">ID Buku</th>
+                            <th style="border: 1px #000 solid;">Judul</th>
+                            <th style="border: 1px #000 solid;">ISBN</th>
+                            <th style="border: 1px #000 solid;">Pengarang</th>
+                            <th style="border: 1px #000 solid;">Halaman</th>
+                            <th style="border: 1px #000 solid;">Tahun Terbit</th>
+                            <th style="border: 1px #000 solid;">Penerbit</th>
                         </tr>
                     </thead>
                     <tbody id="tbody">
@@ -60,14 +60,14 @@
                         $no++;
                         @endphp
                         <tr class="text-center align-items-center">
-                            <th>{{ $no }}</th>
-                            <td>{{ $item-> idBuku }}</td>
-                            <td>{{ $item-> judul }}</td>
-                            <td>{{ $item-> isbn }}</td>
-                            <td>{{ $item-> pengarang }}</td>
-                            <td>{{ $item-> halaman }}</td>
-                            <td>{{ $item-> thn_terbit }}</td>
-                            <td>{{ $item-> penerbit -> namaPenerbit }}</td>
+                            <th style="border: 1px #000 solid;">{{ $no }}</th>
+                            <td style="border: 1px #000 solid;">{{ $item-> idBuku }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item-> judul }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item-> isbn }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item-> pengarang }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item-> halaman }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item-> thn_terbit }}</td>
+                            <td style="border: 1px #000 solid;">{{ $item-> penerbit -> namaPenerbit }}</td>
                         </tr>
                         @empty
                         <tr>

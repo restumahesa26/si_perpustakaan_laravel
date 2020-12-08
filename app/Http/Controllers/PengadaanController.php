@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Pengadaan;
 use App\Models\Buku;
 use App\Http\Requests\PengadaanRequest;
-use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Support\Facades\DB;
 
 class PengadaanController extends Controller
 {

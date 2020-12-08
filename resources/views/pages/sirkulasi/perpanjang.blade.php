@@ -184,7 +184,7 @@
         });
 
         $("document").ready(function(){
-          $('#tgl_pinjam').on("keyup bind cut copy paste focusout change", function () {
+          $('#tgl_pinjam').on("keyup focusout change", function () {
               var value = $(this).val();
               if(!value){
                 toastr.warning('Error', 'Field Tanggal Tidak Boleh Kosong');

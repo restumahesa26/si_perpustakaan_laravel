@@ -44,7 +44,9 @@ class ProfileController extends Controller
     {
         $user = User::findOrFail($id);
 
-        $user->update($id);
+        $user->delete($id);
+
+        return redirect()->route('staf.index');
     }
 
     public function __construct()

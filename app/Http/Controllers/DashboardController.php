@@ -19,7 +19,7 @@ class DashboardController extends Controller
         $tgl = Carbon::now();
         $tgl2 = $tgl->toDateString();
         $absen = Absen::where('tanggal', '=', $tgl2)->count();
-        $transaksi = Peminjaman::where('status', '=', 'Pinjam')->orWhere('status', '=', 'Perpanjang')->where('updated_at', '=', $tgl2)->count();
+        $transaksi = Peminjaman::where('status', '!=', 'Kembali')->where('updated_at', '=', $tgl2)->count();
         return view('pages.dashboard', [
             'peminjam' => $peminjam, 'buku' => $buku, 'peminjaman' => $peminjaman, 'pengembalian' => $pengembalian, 'absen' => $absen, 'transaksi' => $transaksi
         ]);

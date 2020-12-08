@@ -43,7 +43,6 @@
                                     <th>Buku</th>
                                     <th>Asal Buku</th>
                                     <th>Jumlah Masuk</th>
-                                    <th>Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody id="tbody">  
@@ -60,7 +59,6 @@
                                     <td>{{ $item->buku->judul }}</td>
                                     <td>{{ $item->asal_buku }}</td>
                                     <td>{{ $item->jml_masuk }}</td>
-                                    <td>{{ $item->keterangan }}</td>
                                 </tr>
                                 @empty
                                 <tr>
@@ -78,6 +76,24 @@
 @endsection
 
 @push('addon-script')
+    @if (Session::get('error-tanggal'))
+      <script>
+          swal("Error", "Format Tanggal Salah", "error");
+      </script>
+    @endif
+
+    @if (Session::get('error-kosong'))
+      <script>
+          swal("Warning", "Data Tidak Ditemukan Pada Tanggal Tersebut", "warning");
+      </script>
+    @endif
+
+    @if (Session::get('error-kosong1'))
+      <script>
+          swal("Warning", "Data Masih Kosong", "warning");
+      </script>
+    @endif
+
 <!-- Bootstrap Date-Picker Plugin -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>

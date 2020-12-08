@@ -16,81 +16,81 @@
         </div>
 
         <div class="card-show">
-                <div class="card-body">
-                    <form action="{{ route('data-pengadaan.store') }}" method="POST" class="form" id="form">
-                        @csrf
-                        <div class="form-group row">
-                            <div class="col-2">
-                                <label for="buku">Buku</label>
-                            </div>
-                            <div class="col-6">
-                                <select id="buku" name="buku_id" required="required" class="form-control">
-                                    <option value="null">Pilih Buku</option>
-                                    @foreach ($bukus as $buku)
-                                    <option value="{{ $buku->idBuku }}">{{ $buku->idBuku }}</option>
-                                    @endforeach
-                                </select>
-                                @error('buku_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+            <div class="card-body">
+                <form action="{{ route('data-pengadaan.store') }}" method="POST" class="form" id="form">
+                    @csrf
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <label for="buku">Buku</label>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-2">
-                                <p class="text-dark text-bold">Judul Buku</p>
-                                <p class="text-dark text-bold">Pengarang</p>
-                                <p class="text-dark text-bold">Penerbit</p>
-                            </div>
-                            <div class="col-4">
-                                <p id="judul" class="text-dark">-</p>
-                                <p id="pengarang" class="text-dark">-</p>
-                                <p id="penerbit" class="text-dark">-</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="asal_buku">Asal Buku</label>
-                            <input id="asal_buku" type="text" class="form-control @error('asal_buku') is-invalid @enderror" name="asal_buku" placeholder="Asal Buku" value="{{ old('asal_buku') }}">
-                            @error('asal_buku')
+                        <div class="col-6">
+                            <select id="buku" name="buku_id" required="required" class="form-control">
+                                <option value="null">Pilih Buku</option>
+                                @foreach ($bukus as $buku)
+                                <option value="{{ $buku->idBuku }}">{{ $buku->idBuku }}</option>
+                                @endforeach
+                            </select>
+                            @error('buku_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="jml_masuk">Jumlah Masuk</label>
-                            <input id="jml_masuk" type="number" class="form-control @error('jml_masuk') is-invalid @enderror" name="jml_masuk" placeholder="Jumlah Masuk" value="{{ old('jml_masuk') }}" min="0">
-                            @error('jml_masuk')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <p class="text-dark text-bold">Judul Buku</p>
+                            <p class="text-dark text-bold">Pengarang</p>
+                            <p class="text-dark text-bold">Penerbit</p>
                         </div>
-                        <div class="form-group">
-                            <label for="tanggal">Tanggal Masuk</label>
-                            <input id="tanggal" type="text" class="date form-control @error('tanggal') is-invalid @enderror" name="tanggal" autocomplete="off">
-                            @error('tanggal')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                        <div class="col-4">
+                            <p id="judul" class="text-dark">-</p>
+                            <p id="pengarang" class="text-dark">-</p>
+                            <p id="penerbit" class="text-dark">-</p>
                         </div>
-                        <div class="form-group">
-                            <label for="keterangan">Keterangan</label>
-                            <input id="keterangan" type="text" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" placeholder="Keterangan" value="{{ old('keterangan') }}">
-                            @error('keterangan')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block create-confirm">
-                            Simpan
-                        </button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="asal_buku">Asal Buku</label>
+                        <input id="asal_buku" type="text" class="form-control @error('asal_buku') is-invalid @enderror" name="asal_buku" placeholder="Asal Buku" value="{{ old('asal_buku') }}">
+                        @error('asal_buku')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="jml_masuk">Jumlah Masuk</label>
+                        <input id="jml_masuk" type="number" class="form-control @error('jml_masuk') is-invalid @enderror" name="jml_masuk" placeholder="Jumlah Masuk" value="{{ old('jml_masuk') }}" min="0">
+                        @error('jml_masuk')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal">Tanggal Masuk</label>
+                        <input id="tanggal" type="text" class="date form-control @error('tanggal') is-invalid @enderror" name="tanggal" autocomplete="off">
+                        @error('tanggal')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="keterangan">Keterangan</label>
+                        <input id="keterangan" type="text" class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" placeholder="Keterangan" value="{{ old('keterangan') }}">
+                        @error('keterangan')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block create-confirm">
+                        Simpan
+                    </button>
+                </form>
             </div>
+        </div>
     </div>
 </div>
 @endsection

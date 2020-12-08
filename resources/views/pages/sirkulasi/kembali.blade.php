@@ -202,7 +202,7 @@
         });
 
         $("document").ready(function(){
-          $('#tgl_pinjam, #rusak, #hilang').on("keyup bind cut copy paste focusout change", function () {
+          $('#tgl_pinjam, #rusak, #hilang').on("keyup focusout change", function () {
               var value = $(this).val();
               if(!value){
                 toastr.warning('Error', 'Field Tidak Boleh Kosong');

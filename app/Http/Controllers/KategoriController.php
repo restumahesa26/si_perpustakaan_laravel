@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Kategori;
 use App\Http\Requests\KategoriRequest;
 use App\Models\Buku;
-use RealRashid\SweetAlert\Facades\Alert;
 
 
 class KategoriController extends Controller
