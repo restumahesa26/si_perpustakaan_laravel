@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Peminjaman;
-use Illuminate\Support\Carbon;
 
 class RiwayatController extends Controller
 {
