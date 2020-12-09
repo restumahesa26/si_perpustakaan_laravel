@@ -15,7 +15,7 @@ class PengadaanController extends Controller
      */
     public function index()
     {
-        $items = Pengadaan::with(['buku'])->paginate(10);
+        $items = Pengadaan::with(['buku'])->orderByRaw('tanggal DESC')->paginate(10);
         return view('pages.pengadaan.index', [
             'items' => $items
         ]);

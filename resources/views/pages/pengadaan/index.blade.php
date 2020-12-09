@@ -95,7 +95,7 @@
         var name = $(this).data("name");
         event.preventDefault();
         swal({
-            title: `Hapus Data ${name}?`,
+            title: `Hapus Pengadaan ${name}?`,
             text: "Data akan terhapus secara permanen",
             icon: "warning",
             buttons: true,

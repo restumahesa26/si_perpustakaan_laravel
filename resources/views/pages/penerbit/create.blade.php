@@ -40,7 +40,7 @@
 
     @if (Session::get('error-tambah'))
     <script>
-        swal("Gagal", "Nama Kategori Sudah Terdaftar", "error");
+        swal("Gagal", "Nama Penerbit Sudah Terdaftar", "error");
     </script>
     @endif
 

@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="d-sm-flex justify-content-end mb-4">
-                    <span class="text-blue">* nama, no identitas, no handphone, alamat</span>
+                    <span class="text-blue">* id anggota, nama, no identitas, no handphone, alamat</span>
                 </div>
             
                 <div class="row mx-1">

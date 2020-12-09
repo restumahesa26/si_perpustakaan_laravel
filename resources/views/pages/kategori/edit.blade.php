@@ -41,7 +41,7 @@
 @push('addon-script')
 @if (Session::get('error-ubah'))
     <script>
-        swal("Gagal", "No Identitas Sudah Terdaftar", "error");
+        swal("Gagal", "Nama Kategori Sudah Terdaftar", "error");
     </script>
     @endif
 

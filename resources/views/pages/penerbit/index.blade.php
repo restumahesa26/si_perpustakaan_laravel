@@ -87,7 +87,7 @@
         var name = $(this).data("name");
         event.preventDefault();
         swal({
-            title: `Hapus Data ${name}?`,
+            title: `Hapus Penerbit ${name}?`,
             text: "Data akan terhapus secara permanen",
             icon: "warning",
             buttons: true,
