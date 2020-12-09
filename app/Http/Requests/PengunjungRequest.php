@@ -24,12 +24,12 @@ class PengunjungRequest extends FormRequest
     public function rules()
     {
         return [
-            'no_idt' => 'required|min:4|max:20',
-            'nama' => 'required|min:3|max:50',
+            'no_idt' => 'required|min:4|max:30',
+            'nama' => 'required|min:3|max:100',
             'jk' => 'required',
             'no_hp' => 'required|numeric|digits_between:11,13',
-            'alamat' => 'required|min:5|max:100',
-            'password' => 'required|min:8|max:20'
+            'alamat' => 'required|min:5|max:150',
+            'password' => 'required|min:8|max:50'
         ];
     }
 

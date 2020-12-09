@@ -140,4 +140,9 @@ class PengunjungController extends Controller
             'item'=> $item
         ]);
     }
+
+    public function __construct()
+    {
+        $this->middleware(['auth','admin']);
+    }
 }

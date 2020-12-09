@@ -123,4 +123,9 @@ class PengadaanController extends Controller
         $item->delete();
         return redirect() -> route('data-pengadaan.index')-> with('success-hapus','Berhasil');
     }
+
+    public function __construct()
+    {
+        $this->middleware(['auth','admin']);
+    }
 }

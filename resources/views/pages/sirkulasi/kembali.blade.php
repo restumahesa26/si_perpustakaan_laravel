@@ -160,6 +160,12 @@
     });
 </script>
 
+    @if (Session::get('error-absen'))
+    <script>
+        swal("Pengunjung Belum Absen", "Silahkan Absen Terlebih Dahulu", "error");
+    </script>
+    @endif
+    
     @if (Session::get('error-pengembalian'))
     <script>
         swal("Gagal", "Format Tanggal Salah", "error");

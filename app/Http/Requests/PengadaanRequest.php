@@ -24,8 +24,8 @@ class PengadaanRequest extends FormRequest
     public function rules()
     {
         return [
-            'buku_id' => 'required|min:3|max:10', 
-            'asal_buku' => 'required|min:3|max:30',
+            'buku_id' => 'required|min:3|max:20', 
+            'asal_buku' => 'required|min:3|max:50',
             'jml_masuk' => 'required|numeric', 
             'keterangan' => 'required|min:3|max:150',
             'tanggal' => 'required'

@@ -8,6 +8,7 @@ use App\Models\Peminjaman;
 use App\Models\Buku;
 use App\Models\BukuPeminjam;
 use App\Models\Pengunjung;
+use App\Models\Absen;
 use Illuminate\Support\Carbon;
 
 class PeminjamanController extends Controller
@@ -51,8 +52,14 @@ class PeminjamanController extends Controller
 
         $id = $request->pengunjung_id;
         $check = Peminjaman::where('pengunjung_id', '=', $id)->where('status', '=', 'Perpanjang')->orWhere('status', '=', 'Pinjam')->count();
+        $tgl = Carbon::now();
+        $tgl1 = $tgl->toDateString();
+        $check2 = Absen::where('tanggal', '=', $tgl1)->where('pengunjung_id', '=', $id)->first();
 
-        if($check > 3) {
+        if($check2 == null){
+          return redirect()->back()->with('error-absen','Error');
+        }else {
+          if($check > 3) {
             return redirect()->back()->withInput()->with('error-tambah','error');
         }else {
             $buku = array();
@@ -90,6 +97,7 @@ class PeminjamanController extends Controller
                 $bu->save();
             }
             return redirect() -> route('data-peminjaman.index')->with('success-tambah','error');
+        }
         }
     }
 
@@ -169,38 +177,47 @@ class PeminjamanController extends Controller
     public function perpanjang(Request $request, $id)
     {        
         $item = Peminjaman::findOrFail($id);
+        $id2 = $item->pengunjung_id;
 
         $tgl = Carbon::createFromFormat('Y-m-d', $request->tgl_pinjam);
         $date = $tgl->addDays(7);
+        $tgl = Carbon::now();
+        $tgl1 = $tgl->toDateString();
+        $check2 = Absen::where('tanggal', '=', $tgl1)->where('pengunjung_id', '=', $id2)->first();
 
-        if($item->tgl_pinjam > $request->tgl_pinjam){
-            return redirect()->back()->with('error-perpanjang','error');
+        if($check2 == null){
+          return redirect()->back()->with('error-absen','Error');
         }else {
-            $start_date = Carbon::createFromFormat('Y-m-d', $request->tgl_pinjam);
-            $end_date = Carbon::createFromFormat('Y-m-d', $item->tgl_kembali);
+          if($item->tgl_pinjam > $request->tgl_pinjam){
+            return redirect()->back()->with('error-perpanjang','error');
+          }else {
+              $start_date = Carbon::createFromFormat('Y-m-d', $request->tgl_pinjam);
+              $end_date = Carbon::createFromFormat('Y-m-d', $item->tgl_kembali);
 
-            $denda = $item->denda;
-            if($start_date < $end_date){
-                $denda3 = 0;
-            }else {
-                $hari = $end_date->diffInDays($start_date);
-                $denda2 = 2000 * $hari;
-                $denda3 = $denda + $denda2;
-            }
+              $denda = $item->denda;
+              if($start_date < $end_date){
+                  $denda3 = 0;
+              }else {
+                  $hari = $end_date->diffInDays($start_date);
+                  $denda2 = 2000 * $hari;
+                  $denda3 = $denda + $denda2;
+              }
 
-            $status = "Perpanjang";
-            $item->tgl_kembali = $date;
-            $item->tgl_panjang = $request->tgl_pinjam;
-            $item->status = $status;
-            $item->denda = $denda3;
-            $item->save();
-            return redirect() -> route('data-peminjaman.index')->with('success-perpanjang','success');
+              $status = "Perpanjang";
+              $item->tgl_kembali = $date;
+              $item->tgl_panjang = $request->tgl_pinjam;
+              $item->status = $status;
+              $item->denda = $denda3;
+              $item->save();
+              return redirect() -> route('data-peminjaman.index')->with('success-perpanjang','success');
+          }
         }
     }
 
     public function pengembalian(Request $request, $id)
     {        
         $item = Peminjaman::findOrFail($id);
+        $id2 = $item->pengunjung_id;
         $idd = $item->idPeminjaman;
 
         $tgl = Carbon::createFromFormat('Y-m-d', $request->tgl_pinjam);
@@ -213,7 +230,14 @@ class PeminjamanController extends Controller
             $buku[] = $bu;
         } 
 
-        if($item->tgl_pinjam > $request->tgl_pinjam){
+        $tgl = Carbon::now();
+        $tgl1 = $tgl->toDateString();
+        $check2 = Absen::where('tanggal', '=', $tgl1)->where('pengunjung_id', '=', $id2)->first();
+
+        if($check2 == null){
+          return redirect()->back()->with('error-absen','Error');
+        }else {
+          if($item->tgl_pinjam > $request->tgl_pinjam){
             return redirect()->back()->with('error-pengembalian','error');
         }else {
             foreach ($buku as $aa) {
@@ -258,6 +282,7 @@ class PeminjamanController extends Controller
             $item->save();
             return redirect() -> route('data-peminjaman.index')->with('success-pengembalian','success');
         }
+        }
     }
 
     public function hitung_denda(Request $request , $id)
@@ -295,5 +320,10 @@ class PeminjamanController extends Controller
         }
 
         return response()->json(rupiahFormat($denda2));
+    }
+
+    public function __construct()
+    {
+        $this->middleware(['auth','admin']);
     }
 }

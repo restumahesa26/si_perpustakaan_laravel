@@ -190,4 +190,9 @@ class BukuController extends Controller
             return redirect() -> route('data-buku.index') -> with('error-hapus','Gagal');
         }
     }
+
+    public function __construct()
+    {
+        $this->middleware(['auth','admin']);
+    }
 }

@@ -68,11 +68,14 @@
                                 @if ( $item->tujuan == "kembali" )
                                     <p class="badge badge-success">Mengembalikan Buku</p>
                                 @endif
+                                @if ( $item->tujuan == "perpanjang" )
+                                    <p class="badge badge-success">Memperpanjang Buku</p>
+                                @endif
                                 @if ( $item->tujuan == "baca" )
                                     <p class="badge badge-primary">Membaca Buku</p>
                                 @endif
-                                @if ( $item->tujuan == "rekreasi" )
-                                    <p class="badge badge-info">Rekreasi</p>
+                                @if ( $item->tujuan == "kunjung" )
+                                    <p class="badge badge-info">Berkunjung</p>
                                 @endif
                             </td>
                         </tr>

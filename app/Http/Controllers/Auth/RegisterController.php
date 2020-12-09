@@ -55,7 +55,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'roles' => ['required', 'in:ADMIN,STAF'],
             'username' => ['required', 'unique:users', 'string', 'max:255'], 
-            'nip' => ['required', 'unique:users', 'string', 'max:20']
+            'nip' => ['unique:users', 'string', 'max:20']
         ]);
     }
 

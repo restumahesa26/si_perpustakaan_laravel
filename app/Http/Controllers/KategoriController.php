@@ -122,4 +122,9 @@ class KategoriController extends Controller
             return redirect() -> back() -> with('error-hapus','Gagal');
         }
     }
+
+    public function __construct()
+    {
+        $this->middleware(['auth','admin']);
+    }
 }

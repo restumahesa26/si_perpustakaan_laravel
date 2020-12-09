@@ -73,6 +73,19 @@
 @endsection
 
 @push('addon-script')
+
+@if (Session::get('error-delete'))
+    <script>
+        swal("Gagal Menghapus User", "User Sedang Login", "error");
+    </script>
+@endif
+
+@if (Session::get('success-delete'))
+    <script>
+        swal("Berhasil Menghapus User", "Data Terhapus Secara Permanen", "success");
+    </script>
+@endif
+
 <script>
     $('.delete-confirm').click(function(event) {
         var form =  $(this).closest("form");

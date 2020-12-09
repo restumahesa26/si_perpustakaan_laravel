@@ -26,8 +26,8 @@ class BukuRequest extends FormRequest
         return [
             'kategori_id' => 'required|numeric',
             'penerbit_id' => 'required|numeric',
-            'judul' => 'required|min:3|max:100',
-            'isbn' => 'required|min:3|max:20',
+            'judul' => 'required|min:3|max:255',
+            'isbn' => 'required|min:3|max:50',
             'pengarang' => 'required|min:3|max:50',
             'halaman' => 'required|numeric',
             'thn_terbit' => 'required|numeric|digits:4',

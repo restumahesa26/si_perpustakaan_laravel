@@ -68,11 +68,14 @@
                                 @if ( $item->tujuan == "kembali" )
                                     Mengembalikan Buku
                                 @endif
+                                @if ( $item->tujuan == "perpanjang" )
+                                    Memperpanjang Buku
+                                @endif
                                 @if ( $item->tujuan == "baca" )
                                     Membaca Buku
                                 @endif
-                                @if ( $item->tujuan == "rekreasi" )
-                                    Rekreasi
+                                @if ( $item->tujuan == "kunjung" )
+                                    Berkunjung
                                 @endif
                             </td>
                         </tr>

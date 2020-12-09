@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -37,16 +38,18 @@ class ProfileController extends Controller
             'roles' => $request->get('roles')
         ]);
 
-        return redirect()->route('data-staf.index');
+        return redirect()->route('staf.index');
     }
 
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-
-        $user->delete($id);
-
-        return redirect()->route('staf.index');
+        if(Auth::user()->name == $user->name) {
+          return redirect()->back()->with('error-delete','Error');
+        }else {
+          $user->delete($id);
+          return redirect()->route('staf.index')->with('success-delete','Success');
+        }
     }
 
     public function __construct()

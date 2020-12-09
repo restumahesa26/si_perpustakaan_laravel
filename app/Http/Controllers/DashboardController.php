@@ -24,4 +24,9 @@ class DashboardController extends Controller
             'peminjam' => $peminjam, 'buku' => $buku, 'peminjaman' => $peminjaman, 'pengembalian' => $pengembalian, 'absen' => $absen, 'transaksi' => $transaksi_check
         ]);
     }
+
+    public function __construct()
+    {
+        $this->middleware(['auth','admin']);
+    }
 }

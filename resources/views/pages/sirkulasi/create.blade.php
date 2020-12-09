@@ -281,6 +281,12 @@ $(document).on('change', '#pengunjung_id', function (e) {
 });
 </script>
 
+    @if (Session::get('error-absen'))
+    <script>
+        swal("Pengunjung Belum Absen", "Silahkan Absen Terlebih Dahulu", "error");
+    </script>
+    @endif
+
     @if (Session::get('error-tambah'))
     <script>
         swal("Gagal", "Peminjaman Maksimal 3x", "error");

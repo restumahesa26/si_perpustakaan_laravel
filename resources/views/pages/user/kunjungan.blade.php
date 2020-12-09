@@ -33,8 +33,9 @@
                                     <select id="tujuan" class="form-control" name="tujuan">
                                         <option value="pinjam">Meminjam Buku</option>
                                         <option value="kembali">Mengembalikan Buku</option>
+                                        <option value="perpanjang">Memperpanjang Buku</option>
                                         <option value="baca">Membaca Buku</option>
-                                        <option value="rekreasi">Rekreasi</option>
+                                        <option value="kunjung">Berkunjung</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-daftar create-confirm">

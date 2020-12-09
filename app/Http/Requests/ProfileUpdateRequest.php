@@ -44,9 +44,6 @@ class ProfileUpdateRequest extends FormRequest
             'username' => [
                 'required', 'string', 'max:255'
             ], 
-            'nip' => [
-                'required', 'string', 'max:20'
-            ],
         ];
     }
 }
