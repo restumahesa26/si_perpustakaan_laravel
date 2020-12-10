@@ -116,13 +116,13 @@
 
 @if (Session::get('success-tambah'))
     <script>
-        swal("Berhasil", "Data Pengunjung Berhasil Ditambah", "success");
+        swal("Berhasil", "Data Buku Berhasil Ditambah", "success");
     </script>
 @endif
 
 @if (Session::get('success-ubah'))
     <script>
-        swal("Berhasil", "Data Pengunjung Berhasil Diubah", "success");
+        swal("Berhasil", "Data Buku Berhasil Diubah", "success");
     </script>
 @endif
 

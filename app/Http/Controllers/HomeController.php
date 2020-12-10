@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
         $buku = Buku::count() - 1;
         $anggota = Pengunjung::count() -1;
-        $items = Buku::paginate(4);
+        $items = Buku::orderByRaw('stok DESC')->paginate(4);
         $tgl1 = Carbon::now();
         $tgl = $tgl1->toDateString();
         $pengunjung = Absen::where('tanggal', '=', $tgl)->count();

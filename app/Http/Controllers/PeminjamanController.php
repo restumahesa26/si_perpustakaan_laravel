@@ -51,7 +51,8 @@ class PeminjamanController extends Controller
         $data = $request -> all();
 
         $id = $request->pengunjung_id;
-        $check = Peminjaman::where('pengunjung_id', '=', $id)->where('status', '=', 'Perpanjang')->orWhere('status', '=', 'Pinjam')->count();
+        $check = Peminjaman::where('pengunjung_id', '=', $id)->where('status', '=', 'Perpanjang')->count();
+        $check1 = Peminjaman::where('pengunjung_id', '=', $id)->where('status', '=', 'Pinjam')->count();
         $tgl = Carbon::now();
         $tgl1 = $tgl->toDateString();
         $check2 = Absen::where('tanggal', '=', $tgl1)->where('pengunjung_id', '=', $id)->first();
@@ -59,9 +60,9 @@ class PeminjamanController extends Controller
         if($check2 == null){
           return redirect()->back()->with('error-absen','Error');
         }else {
-          if($check > 3) {
+          if($check > 3 || $check1 > 3) {
             return redirect()->back()->withInput()->with('error-tambah','error');
-        }else {
+          }else {
             $buku = array();
 
             if($files=$request->buku_id){
@@ -97,7 +98,7 @@ class PeminjamanController extends Controller
                 $bu->save();
             }
             return redirect() -> route('data-peminjaman.index')->with('success-tambah','error');
-        }
+          }
         }
     }
 
