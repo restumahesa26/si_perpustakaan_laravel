@@ -89,7 +89,7 @@
 
 @push('addon-script')
 <script>
-  $(document).on('keyup change paste', '#no_idt', function (e) {
+  $(document).on('keyup change', '#no_idt', function (e) {
       var no_idt = $('#no_idt').val();
       e.preventDefault();
       $.ajax({

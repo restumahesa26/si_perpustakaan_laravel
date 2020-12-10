@@ -12,16 +12,11 @@
                     <h4>ABOUT US</h4>
                 </div>
                 <div class="col-md-8 text-justify">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, autem fugit amet ut est cupiditate,
-                    iusto quo eligendi nihil minus earum aut veniam sint quae facere voluptatem, consequatur voluptate
-                    repellat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum illo, id iusto aliquam
-                    harum expedita adipisci consequuntur quas quisquam nisi minus ducimus totam voluptate nobis vero
-                    dicta asperiores? Excepturi, ea! <br> <br>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, autem fugit amet ut est cupiditate,
-                    iusto quo eligendi nihil minus earum aut veniam sint quae facere voluptatem, consequatur voluptate
-                    repellat? Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum illo, id iusto aliquam
-                    harum expedita adipisci consequuntur quas quisquam nisi minus ducimus totam voluptate nobis vero
-                    dicta asperiores? Excepturi, ea!
+                  &emsp;&emsp;Pada sistem informasi ini, terdapat 3 jenis pengguna yang dapat mengakses sistem informasi perpustakaan daerah yang dibuat diantaranya <br> <br>
+                  <ul>
+                    <li>Pada pengunjung dapat melakukan aktivitas pengisian absen kunjungan, pada aktivitas ini pengunjung memasukkan id anggota dan password yang sebelumnya sudah terdaftar pada sistem informasi perpustakaan daerah ini. Dan apabila pengunjung belum terdaftar maka pengunjung dapat melakukan registrasi terlebih dahulu di halaman daftar anggota dengan memasukkan nama, password, no identitas, jenis kelamin, nomor telepon, dan alamat. Pengunjung juga dapat melihat daftar buku yang tersedia dalam web yang disediakan.</li> <br>
+                    <li>Pada admin/staff dapat mengelola manajemen buku, manajemen anggota, manajemen transaksi peminjaman, manajemen kategori dan penerbit, manajemen data staff serta manajemen laporan. Untuk mengakses manajemen admin/staff harus login terlebih dahulu. Pada manajemen buku, admin/staff dapat melihat serta melakukan aktivitas penambahan, pengubahan, serta penghapusan data buku. Pada manajemen anggota, admin/staff dapat melihat serta melakukan aktivitas penambahan, pengubahan, serta penghapusan data anggota. Pada manajemen transaksi peminjaman, admin/staff dapat melihat serta melakukan aktivitas penambahan, perpanjangan, pengembalian, serta penghapusan data peminjaman. Pada manajemen kategori dan penerbit, admin/staff dapat melihat serta melakukan aktivitas penambahan, pengubahan, serta penghapusan data kategori atau penerbit. Pada manajemen data staff, admin/staff dapat melihat serta melakukan aktivitas penambahan, pengubahan, serta penghapusan data staff. Dan terakhir pada manajemen laporan, admin/staff dapat melihat serta melakukan aktivitas pembuatan data laporan.</li>
+                  </ul>
                 </div>
             </div>
             <div class="row justify-content-center mt-5">
@@ -37,7 +32,7 @@
                         <h5 class="text-primary">Mufti Restu Mahesa</h5>
                         <p>G1A019014</p>
                         <p class="text-justify">Pada Tugas Akhir Basis Data ini, saya bertugas sebagai Programmer. Yaitu orang yang bertanggung
-                            jawab terhadap seluruh kodingan mualai dari frontend dan backend</p>
+                            jawab terhadap seluruh kodingan mulai dari frontend dan backend</p>
                     </div>
                 </div>
             </div>
@@ -47,9 +42,9 @@
                     <div class="clear-2"></div>
                     <div class="text-desc">
                         <h5 class="text-primary">Norizam Age Pratama</h5>
-                        <p>G1A019014</p>
-                        <p class="text-justify">Pada Tugas Akhir Basis Data ini, saya bertugas sebagai Programmer. Yaitu orang yang bertanggung
-                            jawab terhadap seluruh kodingan mualai dari frontend dan backend</p>
+                        <p>G1A018088</p>
+                        <p class="text-justify">Pada Tugas Akhir Basis Data ini, saya bertugas sebagai Desainer dan Insert Data. Yaitu orang yang bertanggung
+                            jawab terhadap desain dari website tersebut dan juga bertanggung jawab terhadap data</p>
                     </div>
                 </div>
             </div>
@@ -60,8 +55,8 @@
                     <div class="text-desc">
                         <h5 class="text-primary">Hendra Yesekyel Pangaribuan</h5>
                         <p>G1A019072</p>
-                        <p class="text-justify">Pada Tugas Akhir Basis Data ini, saya bertugas sebagai Programmer. Yaitu orang yang bertanggung
-                            jawab terhadap seluruh kodingan mualai dari frontend dan backend</p>
+                        <p class="text-justify">Pada Tugas Akhir Basis Data ini, saya bertugas sebagai Desainer dan Insert Data. Yaitu orang yang bertanggung
+                          jawab terhadap desain dari website tersebut dan juga bertanggung jawab terhadap data</p>
                     </div>
                 </div>
             </div>
