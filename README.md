@@ -1,6 +1,6 @@
 ![home-web](https://user-images.githubusercontent.com/58359912/103770840-40898d80-5059-11eb-8904-6b77062b038e.png)
 
-![dashboard-web](https://user-images.githubusercontent.com/58359912/103770686-ff917900-5058-11eb-8db1-cb1cdaa2c260.png)
+![dashboard-web](https://user-images.githubusercontent.com/58359912/103771010-8e9e9100-5059-11eb-82e4-3443add95c47.png)
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
